@@ -23,14 +23,14 @@ namespace OnlineSinav.Areas.Admin.Controllers
         }
         public ActionResult ViewStudents()
         {
-            
+
 
             return View(new ViewStudents
             {
                 allStudents = Database.Session.Query<Users>().Where(u => u.Role.RoleName == "student").ToList()
-                
 
-        });
+
+            });
         }
         public ActionResult ViewAdmin()
         {
@@ -58,13 +58,13 @@ namespace OnlineSinav.Areas.Admin.Controllers
             });
         }
 
-        private void setUserDept(int departmentID, IList<Models.Department> allDepts)
+        private void setUserDept(int deptID, IList<Models.Department> userDept)
         {
             foreach (var departments in Database.Session.Query<Models.Department>())
             {
-                if (departments.id == departmentID)
+                if (departments.id == deptID)
                 {
-                    allDepts.Add(departments);
+                    userDept.Add(departments);
                 }
             }
         }
@@ -72,7 +72,6 @@ namespace OnlineSinav.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult CreateUser(CreateUser form)
         {
-
             if (Database.Session.Query<Users>().Any(u => u.SchoolNumber == form.school_number))
             {
                 ModelState.AddModelError("school_number", "Belirtilen numaraya ait bir kullanıcı zaten var.");
@@ -81,20 +80,22 @@ namespace OnlineSinav.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(form);
 
-            Users newUser = new Users();
-
-            newUser.SchoolNumber = form.school_number;
-            newUser.Role = new Roles
-            {
-                id = form.userRoleID
+            Users newUser = new Users {
+                SchoolNumber = form.school_number,
+                Role = new Roles
+                {
+                    id = form.userRoleID
+                },
+                Name = form.firstname_lastname
             };
-            setUserDept(form.userDeptID, newUser.depts);
+            
+            setUserDept(form.userDeptID, newUser.depts);            
 
-            newUser.Name = form.firstname_lastname;
             newUser.SetPassword(form.password);
 
             Database.Session.Save(newUser);
             Database.Session.Flush();
+
             var userRole = Database.Session.Load<Roles>(form.userRoleID).RoleName;
             if (userRole == "admin")
             {
@@ -110,11 +111,6 @@ namespace OnlineSinav.Areas.Admin.Controllers
             }
             else
                 return RedirectToAction("ViewStudents");
-
-
-
-
-            return RedirectToAction("Index");
         }
 
         public ActionResult DeleteUser(int id)
@@ -123,14 +119,14 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             Database.Session.Delete(user);
             Database.Session.Flush();
-            
-            
+
+
             //return RedirectToAction("ViewStudents");
             return RedirectToAction("Index");
             //return RedirectToAction("ViewStudents");
 
         }
-                      
+
         private void SyncRoles(IList<RolDropDown> checkBoxes, IList<Roles> roles)
         {
             var selectedRoles = new List<Roles>();
@@ -154,27 +150,28 @@ namespace OnlineSinav.Areas.Admin.Controllers
             {
                 roles.Remove(toRemove);
             }
-        } 
+        }
 
-            public ActionResult EditUser(int id)
-    {
+        public ActionResult EditUser(int id)
+        {
             var user = Database.Session.Load<Users>(id);
             IEnumerable<Roles> AllRoles = Database.Session.Query<Roles>();
             IEnumerable<Department> AllDepartment = Database.Session.Query<Department>();
 
 
-            return View(new CreateUser {
+            return View(new CreateUser
+            {
                 firstname_lastname = user.Name,
                 school_number = user.SchoolNumber,
                 allRoles = new SelectList(AllRoles),
                 SelectedRoleID = System.Convert.ToString(user.Role.id),
                 allDepts = new SelectList(AllDepartment),
-   
+
             });
-           
-    }
+
+        }
         [HttpPost]
-        public ActionResult EditUser(int id,CreateUser formdata)
+        public ActionResult EditUser(int id, CreateUser formdata)
         {
             var role = Database.Session.Load<Roles>(System.Convert.ToInt32(formdata.SelectedRoleID));
             var newUser = Database.Session.Load<Users>(id);
@@ -185,7 +182,7 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             if (!ModelState.IsValid)
                 return View(formdata);
-                        
+
             newUser.SchoolNumber = formdata.school_number;
             setUserDept(formdata.userDeptID, newUser.depts);
             newUser.Name = formdata.firstname_lastname;
@@ -196,11 +193,6 @@ namespace OnlineSinav.Areas.Admin.Controllers
             Database.Session.Flush();
 
             return RedirectToAction("Index");
-
-
-
-
-
         }
         public ActionResult Delete(int id)
         {
@@ -213,35 +205,27 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             Database.Session.Delete(user);
             Database.Session.Flush();
-            if(userRole == "admin")
+            if (userRole == "admin")
             {
                 return RedirectToAction("ViewAdmin");
 
 
             }
-            else if(userRole == "teacher")
+            else if (userRole == "teacher")
             {
                 return RedirectToAction("Index");
 
 
             }
-            else 
-            return RedirectToAction("ViewStudents");
-
+            else
+                return RedirectToAction("ViewStudents");
         }
-
-
     }
+}
 
 
 
 
-    }
 
 
-        
-          
 
-
-        
-    

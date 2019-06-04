@@ -22,7 +22,7 @@ namespace OnlineSinav.Models
         {
             Schema("onlineexam");
             Lazy(true);
-            Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Assigned); });
+            Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Identity); });
             Property(x => x.RoleName, map => { map.Column("role_name"); map.NotNullable(true); });
 
 

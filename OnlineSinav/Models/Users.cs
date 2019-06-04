@@ -18,7 +18,6 @@ namespace OnlineSinav.Models
             depts = new List<Department>();
         }
 
-
         public virtual void SetPassword(string password)
         {
             Password = BCrypt.Net.BCrypt.HashPassword(password, 13);
@@ -36,7 +35,7 @@ namespace OnlineSinav.Models
         public UsersMap()
         {
             Schema("onlineexam");
-            Id(x => x.id, map => map.Generator(Generators.Assigned));
+            Id(x => x.id, map => map.Generator(Generators.Identity));
             Property(x => x.Name, map => map.NotNullable(true));
             Property(x => x.SchoolNumber, map => { map.Column("school_number"); map.NotNullable(true); });
             Property(x => x.Password, map => map.NotNullable(true));

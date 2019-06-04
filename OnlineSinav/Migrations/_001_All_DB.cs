@@ -9,7 +9,7 @@ namespace OnlineSinav.Migrations
         {
             Delete.Table("dept_user");
             Delete.Table("Lessons");
-            Delete.Table("exam_student");
+            Delete.Table("exam_result");
             Delete.Table("exam_quest");
             Delete.Table("Questions");
             Delete.Table("Exam");
@@ -41,6 +41,8 @@ namespace OnlineSinav.Migrations
             Create.Table("Exam")
                 .WithColumn("id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("exam_name").AsString(128)
+                .WithColumn("exam_time_from").AsDate()
+                .WithColumn("exam_time_to").AsDate()
                 .WithColumn("dept_id").AsInt32().ForeignKey("Department", "id").OnDelete(System.Data.Rule.Cascade);
             //----------------------------------------------------------------
             //----------------------------------------------------------------
@@ -82,6 +84,7 @@ namespace OnlineSinav.Migrations
             /*
              cmd satırı:                                                                           
              migrate -a C:\Users\berka\source\repos\OnlineSinav\OnlineSinav\bin\OnlineSinav.dll -db MySql -conn "Data Source= 127.0.0.1; Database = onlineexam; uid=root; pwd=b2362123;"
+             migrate -a C:\Users\Atabay\Documents\GitHub\NewOnlineExam\OnlineSinav\bin\OnlineSinav.dll -db MySql -conn "Data Source= 127.0.0.1; Database = onlineexam; uid=root; pwd=root;"
              */
 
             /*

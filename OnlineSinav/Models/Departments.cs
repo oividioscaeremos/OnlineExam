@@ -5,7 +5,6 @@ namespace OnlineSinav.Models
 {
     public class Department
     {
-        public Department() { }
         public virtual int id { get; set; }
         public virtual string DeptName { get; set; }
     }
@@ -16,7 +15,7 @@ namespace OnlineSinav.Models
         public DepartmentMap()
         {
             Schema("onlineexam");
-            Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Assigned); });
+            Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Identity); });
             Property(x => x.DeptName, map => { map.Column("dept_name"); map.NotNullable(true); });
         }
     }
