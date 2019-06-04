@@ -186,6 +186,7 @@ namespace OnlineSinav.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var user = Database.Session.Load<Users>(id);
+            var userRole = user.Role.RoleName;
             if (user == null)
             {
                 return HttpNotFound();
@@ -193,8 +194,20 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             Database.Session.Delete(user);
             Database.Session.Flush();
+            if(userRole == "admin")
+            {
+                return RedirectToAction("ViewAdmin");
 
-            return RedirectToAction("Index");
+
+            }
+            else if(userRole == "teacher")
+            {
+                return RedirectToAction("Index");
+
+
+            }
+            else 
+            return RedirectToAction("ViewStudents");
 
         }
 
