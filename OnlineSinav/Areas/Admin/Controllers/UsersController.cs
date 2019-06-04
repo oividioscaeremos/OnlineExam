@@ -95,6 +95,24 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             Database.Session.Save(newUser);
             Database.Session.Flush();
+            var userRole = Database.Session.Load<Roles>(form.userRoleID).RoleName;
+            if (userRole == "admin")
+            {
+                return RedirectToAction("ViewAdmin");
+
+
+            }
+            else if (userRole == "teacher")
+            {
+                return RedirectToAction("Index");
+
+
+            }
+            else
+                return RedirectToAction("ViewStudents");
+
+
+
 
             return RedirectToAction("Index");
         }
@@ -110,6 +128,7 @@ namespace OnlineSinav.Areas.Admin.Controllers
             //return RedirectToAction("ViewStudents");
             return RedirectToAction("Index");
             //return RedirectToAction("ViewStudents");
+
         }
                       
         private void SyncRoles(IList<RolDropDown> checkBoxes, IList<Roles> roles)

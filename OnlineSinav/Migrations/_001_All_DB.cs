@@ -60,9 +60,14 @@ namespace OnlineSinav.Migrations
                 .WithColumn("quest_id").AsInt32().ForeignKey("Questions", "id").OnDelete(System.Data.Rule.Cascade);
             //----------------------------------------------------------------
             //----------------------------------------------------------------
-            Create.Table("exam_student")
+            Create.Table("exam_results")
+                .WithColumn("id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("exam_id").AsInt32().ForeignKey("Exam", "id").OnDelete(System.Data.Rule.Cascade)
-                .WithColumn("user_id").AsInt32().ForeignKey("Users", "id").OnDelete(System.Data.Rule.Cascade);
+                .WithColumn("teacher_id").AsInt32().ForeignKey("Users", "id").OnDelete(System.Data.Rule.Cascade)
+                .WithColumn("student_id").AsInt32().ForeignKey("Users", "id").OnDelete(System.Data.Rule.Cascade)
+                .WithColumn("students_answers").AsString(256)
+                .WithColumn("correct_answers").AsString(256)
+                .WithColumn("result").AsInt32();
             //----------------------------------------------------------------
             //----------------------------------------------------------------
             Create.Table("Lessons")
