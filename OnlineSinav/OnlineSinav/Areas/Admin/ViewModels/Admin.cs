@@ -22,7 +22,6 @@ namespace OnlineSinav.ViewModels
 
         public IEnumerable<Users> allTeachers { get; set; }
     }
-
     public class ViewStudents
     {
         [Display(Name = "Rol")]
@@ -36,15 +35,14 @@ namespace OnlineSinav.ViewModels
 
         public IEnumerable<Users> allStudents { get; set; }
     }
+
+
+}
     public class RolDropDown
     {
         public int id { get; set; }
         public string name { get; set; }
             }
-
-
-
-
 
     public class CreateUser
     {

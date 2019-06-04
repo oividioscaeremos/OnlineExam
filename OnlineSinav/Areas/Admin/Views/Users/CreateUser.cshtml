@@ -1,0 +1,81 @@
+﻿@model OnlineSinav.ViewModels.CreateUser
+@{
+    ViewBag.Title = "CreateUser";
+}
+
+<!-- BASIC FORM ELELEMNTS -->
+<div class="row mt">
+    <div class="col-lg-6" style="margin: 0 auto; width:50%">
+        <div class="form-panel">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> YENI KULLANICI OLUSTUR</h4>
+            <form class="form-horizontal style-form" method="post">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.firstname_lastname, new { @class = "col-sm-2 col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.firstname_lastname, new { @class = "form-control" })
+                    </div>
+                    <p class="help-block">
+                        @Html.ValidationMessageFor(m => m.firstname_lastname)
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.school_number, new { @class = "col-sm-2 col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.school_number, new { @class = "form-control" })
+                    </div>
+                    <p class="help-block">
+                        @Html.ValidationMessageFor(m => m.school_number)
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.userRoleID, new { @class = "col-sm-2 col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        <!--roller burada olacak-->
+                        @Html.DropDownListFor(m => m.userRoleID, new SelectList(Model.allRoles.Items, "id", "RoleName", 1), "Bir rol seçiniz.", new { @class = "form-control" })
+
+                    </div>
+                    <p class="help-block">
+                        @Html.ValidationMessage("Rol seçimi yapılmalı.")
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.userDeptID, new { @class = "col-sm-2 col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        <!--roller burada olacak-->
+                        @Html.DropDownListFor(m => m.userDeptID, new SelectList(Model.allDepts.Items, "id", "DeptName", 1), "Bir bölüm seçiniz.", new { @class = "form-control" })
+
+                    </div>
+                    <p class="help-block">
+                        @Html.ValidationMessage("Rol seçimi yapılmalı.")
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.password, new { @class = "col-sm-2 col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+                    </div>
+                    <p class="help-block">
+                        @Html.ValidationMessageFor(m => m.password)
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.password_confirm, new { @class = "col-sm-2 col-sm-2 control-label" })
+                    <div class="col-sm-10">
+                        @Html.PasswordFor(m => m.password_confirm, new { @class = "form-control" })
+                    </div>
+                    <p class="help-block">
+                        @Html.ValidationMessageFor(m => m.password_confirm)
+                    </p>
+                </div>
+                <input type="submit" value="Create User" class="btn btn-primary btn-lg btn-block" />
+            </form>
+        </div>
+    </div>
+    <!-- col-lg-12-->
+</div>
+<!-- /row -->

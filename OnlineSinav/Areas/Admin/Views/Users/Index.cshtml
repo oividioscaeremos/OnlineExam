@@ -1,0 +1,39 @@
+﻿@model OnlineSinav.ViewModels.ViewTeacher
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row mt">
+    <div class="col-md-12">
+        <div class="content-panel">
+            <h4><i class="fa fa-angle-right"></i> Öğretim Elemanları</h4><hr><table class="table table-striped table-advance table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="fa fa-user"></i> @Html.DisplayNameFor(m => m.firstname_lastname)</th>
+                        <th class="hidden-phone"><i class="fa fa-power-off"></i> @Html.DisplayNameFor(m => m.school_number)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.allTeachers)
+                    {
+                    <tr>
+                        <td>
+                            <a href="basic_table.html#">@user.Name</a>
+                        </td>
+                        <td class="hidden-phone">@user.SchoolNumber</td>
+                        <td>
+                           
+                            <a href="@Url.Action("EditUser",new { user.id})" class="btn btn-xs btn-primary">Edit</a>
+                            <a href="@Url.Action("Delete",new { user.id})" class="btn btn-xs btn-danger">Delete</a>
+                        
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /content-panel -->
+    </div>
+    <!-- /col-md-12 -->
+</div>

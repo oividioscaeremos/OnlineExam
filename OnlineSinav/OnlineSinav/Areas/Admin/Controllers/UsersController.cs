@@ -17,6 +17,16 @@ namespace OnlineSinav.Areas.Admin.Controllers
             return View(new ViewTeacher
             {
                 allTeachers = Database.Session.Query<Users>().Where(u => u.Role.RoleName == "teacher").ToList()
+               
+            });
+            
+        }
+        public ActionResult Index1()
+        {
+            return View(new ViewStudents
+            {
+                allStudents = Database.Session.Query<Users>().Where(u => u.Role.RoleName == "student").ToList()
+
             });
         }
 
