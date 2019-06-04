@@ -29,7 +29,8 @@ namespace OnlineSinav.Areas.Admin.Controllers
             {
                 allStudents = Database.Session.Query<Users>().Where(u => u.Role.RoleName == "student").ToList()
                 
-            });
+
+        });
         }
         public ActionResult ViewAdmin()
         {
@@ -104,8 +105,11 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             Database.Session.Delete(user);
             Database.Session.Flush();
-
+            
+            
+            //return RedirectToAction("ViewStudents");
             return RedirectToAction("Index");
+            //return RedirectToAction("ViewStudents");
         }
                       
         private void SyncRoles(IList<RolDropDown> checkBoxes, IList<Roles> roles)

@@ -38,25 +38,29 @@
 <body>
     <!-- **********************************************************************************************************************************************************
         MAIN CONTENT
+        
         *********************************************************************************************************************************************************** -->
+
     <div id="login-page">
         <div class="container" style="vertical-align:middle;">
-            <form class="form-login">
+            @using (Html.BeginForm())
+            {
+                <form class="form-login">
 
-                @using (Html.BeginForm())
-                {
+                    @Html.ValidationSummary()
                     <h2 class="form-login-heading">sign in now</h2>
                     <div class="login-wrap">
-
+                        @Html.LabelFor(f => f.school_number)
                         @Html.TextBoxFor(f => f.school_number, new { placeholder = "Numara", @class = "form-control" })
                         <br>
+                        @Html.LabelFor(f => f.password)
                         @Html.TextBoxFor(f => f.password, new { placeholder = "Şifre", @class = "form-control" })
                         <br>
                         <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Giriş yap</button>
-
                     </div>
-                }
-            </form>
+
+                </form>
+            }
         </div>
 
     </div>

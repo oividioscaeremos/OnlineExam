@@ -13,10 +13,12 @@ namespace OnlineSinav.Controllers
     public class AuthController : Controller
     {
         // GET: Auth
+        
         public ActionResult Login()
         {
-
+               
             return View();
+            
         }
         [HttpPost]
         public ActionResult Login(AuthLogin formData, string returnUrl)
@@ -25,7 +27,7 @@ namespace OnlineSinav.Controllers
 
             var user = Database.Session.Query<Users>().FirstOrDefault(p => p.SchoolNumber == formData.school_number);
 
-            if (user == null || user.CheckPassword(formData.password))
+            if (user == null )
             {
                 ModelState.AddModelError("SchoolNumber", "Numara veya şifre yanlış.");
             }
@@ -33,13 +35,14 @@ namespace OnlineSinav.Controllers
             {
                 return View();
             }
+
             FormsAuthentication.SetAuthCookie(formData.school_number, true);
             if (!String.IsNullOrWhiteSpace(returnUrl))
             {
-                return Redirect(returnUrl);
+                return Redirect(returnUrl); 
             }
 
-            return RedirectToRoute("Home");
+            return RedirectToAction("Index","Users",new { area = "Admin" });
         }
         public ActionResult Logout()
         {
