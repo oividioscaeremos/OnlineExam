@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OnlineSinav.Areas.Teacher.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,14 +20,25 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             return View();
         }
 
-        public ActionResult ReturnPartial()
-        {
-            //return PartialView("_QuestionLayout", OnlineSinav.Areas.Teacher.ViewModels.NewExam);
-        }
-
         public ActionResult CreateExam() // Öğretmenin ID'sini alacak
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult CreateExam(string formdata) // BURASI ŞU ANDA ÇALIŞMIYOR ELLEYENİ TERS ÇEVİRİR KÖTÜ HAREKETLERE MARUZ BIRAKIRIM.
+        { 
+
+            var abc = formdata;
+            formdata.Replace("'\'","");
+
+            var abcde = formdata;
+            examQuests eq = JsonConvert.DeserializeObject<examQuests>(formdata);
+
+            Questions[] examQuests = (Questions[])JsonConvert.DeserializeObject(formdata);
+            
+            var abcd = formdata[1];
+            return RedirectToAction("index");
+
         }
     }
 }

@@ -31,14 +31,20 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
     }
 
     public class Questions
-    {
-        public IList<Questions> questions { get; set; }
+    {        
+        [Display(Name ="SORU ALANI")]
         public string question_string { get; set; }
         public string A { get; set; }
         public string B { get; set; }
         public string C { get; set; }
         public string D { get; set; }
         public string E { get; set; }
+        [Display(Name ="DOĞRU CEVAP")]
         public string correct_answer { get; set; }
+    }
+
+    public class examQuests
+    {
+        public List<Questions> questions { get; set; }
     }
 }
