@@ -191,8 +191,23 @@ namespace OnlineSinav.Areas.Admin.Controllers
 
             Database.Session.Update(newUser);
             Database.Session.Flush();
+            var user = Database.Session.Load<Users>(id);
+            var userRole = user.Role.RoleName;
+            
+            if (userRole == "admin")
+            {
+                return RedirectToAction("ViewAdmin");
 
-            return RedirectToAction("Index");
+
+            }
+            else if (userRole == "teacher")
+            {
+                return RedirectToAction("Index");
+
+
+            }
+            else
+                return RedirectToAction("ViewStudents");
         }
         public ActionResult Delete(int id)
         {
