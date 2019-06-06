@@ -27,10 +27,11 @@ namespace OnlineSinav.Controllers
 
             var user = Database.Session.Query<Users>().FirstOrDefault(p => p.SchoolNumber == formData.school_number);
 
-            if (user == null )
+            if (user == null || !(user.CheckPassword(formData.password)))
             {
-                ModelState.AddModelError("SchoolNumber", "Numara veya şifre yanlış.");
+                ModelState.AddModelError("schoolNumber", "Numara veya şifre yanlış.");
             }
+
             if (!ModelState.IsValid)
             {
                 return View();
