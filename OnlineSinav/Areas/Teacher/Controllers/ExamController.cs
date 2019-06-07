@@ -27,7 +27,7 @@ namespace OnlineSinav.Areas.Teacher.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateExam(string formdata, string examDetails){ // BURASI ŞU ANDA ÇALIŞMIYOR ELLEYENİ TERS ÇEVİRİR KÖTÜ HAREKETLERE MARUZ BIRAKIRIM.
+        public ActionResult CreateExam(string formdata, string examDetails){
 
             var questionsArray = JsonConvert.DeserializeObject<List<FormData>>(formdata);
             var examDetailsArray = JsonConvert.DeserializeObject<List<GetFormData>>(examDetails);
