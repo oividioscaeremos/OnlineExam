@@ -434,6 +434,7 @@
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Student\Views\Student\Index.cshtml" />
     <Content Include="Content\img\Sorting icons.psd" />
+    <Content Include="Areas\Student\Views\Student\questionsView.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

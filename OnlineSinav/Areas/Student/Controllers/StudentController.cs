@@ -13,5 +13,11 @@ namespace OnlineSinav.Areas.Student.Controllers
         {
             return View();
         }
+
+        public ActionResult questionsView()
+        {
+            return View();
+
+        }
     }
 }
