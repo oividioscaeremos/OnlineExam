@@ -10,6 +10,7 @@ namespace OnlineSinav.Migrations
             Delete.Table("dept_user");
             Delete.Table("Lessons");
             Delete.Table("exam_result");
+            Delete.Table("exam_student");
             Delete.Table("exam_quest");
             Delete.Table("Questions");
             Delete.Table("Exam");
@@ -55,12 +56,18 @@ namespace OnlineSinav.Migrations
                 .WithColumn("answer3").AsString(128)
                 .WithColumn("answer4").AsString(128)
                 .WithColumn("answer5").AsString(128)
-                .WithColumn("true_answer").AsString(128);
+                .WithColumn("true_answer").AsString(128)
+                .WithColumn("dept_id").AsInt32();
             //----------------------------------------------------------------
             //----------------------------------------------------------------
             Create.Table("exam_quest")
                 .WithColumn("exam_id").AsInt32().ForeignKey("Exam", "id").OnDelete(System.Data.Rule.Cascade)
                 .WithColumn("quest_id").AsInt32().ForeignKey("Questions", "id").OnDelete(System.Data.Rule.Cascade);
+            //----------------------------------------------------------------
+            //----------------------------------------------------------------
+            Create.Table("exam_student")
+                .WithColumn("exam_id").AsInt32().ForeignKey("Exam", "id").OnDelete(System.Data.Rule.Cascade)
+                .WithColumn("student_id").AsInt32().ForeignKey("Users", "id").OnDelete(System.Data.Rule.Cascade);
             //----------------------------------------------------------------
             //----------------------------------------------------------------
             Create.Table("exam_results")

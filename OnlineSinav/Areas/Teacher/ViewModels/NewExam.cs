@@ -6,22 +6,6 @@ using System.Web;
 
 namespace OnlineSinav.Areas.Teacher.ViewModels
 {
-    public class NewExam
-    {
-        [Display(Name = "Oluşturulacak Sınav Adı")]
-        [Required(ErrorMessage = "Sınav adı belirtilmelidir.")]
-        [DataType(DataType.Text)]
-        public string exam_name { get; set; }
-
-        [Display(Name = "Sınava Girişlerin Başlayacağı Tarih")]
-        [Required(ErrorMessage = "Sınavın başlayacağı tarih seçilmelidir.")]
-        public DateTime dateFrom { get; set; }
-
-        [Display(Name = "Sınava Girişlerin Sonlanacağı Tarih")]
-        [Required(ErrorMessage = "Sınava girişlerin sonlanacağı tarih seçilmelidir.")]
-        public DateTime dateTo { get; set; }
-    }
-
     public class FormData
     {
         public string question_string { get; set; }
@@ -43,8 +27,38 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
             correct_answer = _correct_answer;
         }
     }
+
+    public class GetFormData
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
+
+        public GetFormData(string name, string val)
+        {
+            Name = name;
+            Value = val;
+        }
+    }
+
     public class Questions
     {
+        [Display(Name = "Oluşturulacak Sınav Adı")]
+        [Required(ErrorMessage = "Sınav adı belirtilmelidir.")]
+        [DataType(DataType.Text)]
+        public string exam_name { get; set; }
+
+        [Display(Name = "Sınava Girişlerin Başlayacağı Tarih")]
+        [Required(ErrorMessage = "Sınavın başlayacağı tarih seçilmelidir.")]
+        public DateTime dateFrom { get; set; }
+
+        [Display(Name = "Sınava Girişlerin Sonlanacağı Tarih")]
+        [Required(ErrorMessage = "Sınava girişlerin sonlanacağı tarih seçilmelidir.")]
+        public DateTime dateTo { get; set; }
+
+        [Display(Name = "Sınav Süresi")]
+        [Required(ErrorMessage = "Sınav süresi belirtilmelidir.")]
+        public string examDuration { get; set; }
+
         [Display(Name = "SORU ALANI")]
         public string question_string { get; set; }
         public string A { get; set; }

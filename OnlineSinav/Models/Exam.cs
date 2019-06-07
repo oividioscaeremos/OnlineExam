@@ -14,6 +14,7 @@ namespace OnlineSinav.Models
         public virtual DateTime dateTo { get; set; }
         public virtual Department Department { get; set; }
         public virtual string ExamName { get; set; }
+        public virtual string ExamDuration { get; set; }
 
         public virtual IList<Questions> ExamQuestions { get; set; }
         public virtual IList<Users> ExamStudents { get; set; }
@@ -36,6 +37,7 @@ namespace OnlineSinav.Models
             Property(x => x.ExamName, map => { map.Column("exam_name"); map.NotNullable(true); });
             Property(x => x.dateFrom, map => { map.Column("exam_time_from"); map.NotNullable(true); });
             Property(x => x.dateTo, map => { map.Column("exam_time_to"); map.NotNullable(true); });
+            Property(x => x.ExamDuration, map => { map.Column("exam_duration"); map.NotNullable(true); });
 
             ManyToOne(x => x.Department, map => { map.Column("dept_id"); map.Cascade(Cascade.Remove); });
 
@@ -43,6 +45,11 @@ namespace OnlineSinav.Models
                 x.Table("exam_quest");
                 x.Key(k => k.Column("exam_id"));
             }, x => x.ManyToMany(k => k.Column("quest_id")));
+
+            Bag(x => x.ExamStudents, x => {
+                x.Table("exam_student");
+                x.Key(k => k.Column("exam_id"));
+            }, x => x.ManyToMany(k => k.Column("student_id")));
         }
     }
 }

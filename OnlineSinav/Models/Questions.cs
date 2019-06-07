@@ -18,6 +18,8 @@ namespace OnlineSinav.Models
         public virtual string Answer4 { get; set; }
         public virtual string Answer5 { get; set; }
         public virtual string TrueAnswer { get; set; }
+        public virtual Department dept_id { get; set; }
+
     }
 
     public class QuestionsMap : ClassMapping<Questions>
@@ -38,6 +40,7 @@ namespace OnlineSinav.Models
             Property(x => x.Answer5, map => map.NotNullable(true));
 
             Property(x => x.TrueAnswer, map => { map.Column("true_answer"); map.NotNullable(true); });
+            ManyToOne(x => x.dept_id, map => { map.Column("dept_id"); map.Cascade(Cascade.Remove); });
         }
     }
 }
