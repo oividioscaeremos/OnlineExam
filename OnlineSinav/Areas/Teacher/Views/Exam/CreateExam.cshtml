@@ -11,7 +11,7 @@
                 <button type="button" class="btn btn-success newQuest"><i class="fa-plus">  Yeni Soru Ekle</i></button>
                 @Html.Partial("_QuestionLayout", Model)
             </div>
-            <button type="button" class="btn btn-primary" id="submitForm">Sınavı Kaydet</button>
+            <button type="button" class="btn btn-primary" id="submitForm">SINAVI KAYDET</button>
         </form>
     </div>
 </div>
@@ -57,7 +57,7 @@
                 x++;
                 $(wrapper).append(partialHTML); //add input box
             } else {
-                alert('Daha fazla soru ekleyemezsiniz!')
+                alert('You Reached the limits')
             }
         });
 

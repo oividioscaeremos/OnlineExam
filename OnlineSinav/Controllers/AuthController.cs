@@ -2,6 +2,7 @@
 using OnlineSinav.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -43,12 +44,25 @@ namespace OnlineSinav.Controllers
                 return Redirect(returnUrl); 
             }
 
-            return RedirectToAction("Index","Users",new { area = "Admin" });
+            if (user.Role.RoleName == "admin")
+            {
+                return RedirectToAction("Index", "Users", new { area = "Admin" });
+            }
+            else if (user.Role.RoleName == "student")
+            {
+                return RedirectToAction("Index", "Student", new {area = "Student"});
+            }
+            else return RedirectToAction("Index", "Exam", new { area = "Teacher" });
+
+
+
         }
         public ActionResult Logout()
         {
+            
+            
             FormsAuthentication.SignOut();
-            return RedirectToRoute("Home");
+            return RedirectToAction("Logout", "Auth","Logout");
         }
 
 
