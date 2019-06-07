@@ -206,9 +206,18 @@
     <Content Include="Content\img\500.png" />
     <Content Include="Content\img\apple-touch-icon.png" />
     <Content Include="Content\img\arkaplan9.jpg" />
+    <Content Include="Content\img\back_disabled.png" />
+    <Content Include="Content\img\back_enabled.png" />
+    <Content Include="Content\img\back_enabled_hover.png" />
     <Content Include="Content\img\blog-bg.jpg" />
     <Content Include="Content\img\checkbox-gray.png" />
+    <Content Include="Content\img\details_close.png" />
+    <Content Include="Content\img\details_open.png" />
+    <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\forward_disabled.png" />
+    <Content Include="Content\img\forward_enabled.png" />
+    <Content Include="Content\img\forward_enabled_hover.png" />
     <Content Include="Content\img\friends\fr-01.jpg" />
     <Content Include="Content\img\friends\fr-02.jpg" />
     <Content Include="Content\img\friends\fr-03.jpg" />
@@ -234,6 +243,11 @@
     <Content Include="Content\img\profile-01.jpg" />
     <Content Include="Content\img\profile-02.jpg" />
     <Content Include="Content\img\radio-gray.png" />
+    <Content Include="Content\img\sort_asc.png" />
+    <Content Include="Content\img\sort_asc_disabled.png" />
+    <Content Include="Content\img\sort_both.png" />
+    <Content Include="Content\img\sort_desc.png" />
+    <Content Include="Content\img\sort_desc_disabled.png" />
     <Content Include="Content\img\ui-danro.jpg" />
     <Content Include="Content\img\ui-divya.jpg" />
     <Content Include="Content\img\ui-sam.jpg" />
@@ -417,6 +431,9 @@
     <Content Include="Areas\Teacher\Views\Exam\Index.cshtml" />
     <Content Include="Areas\Teacher\Views\Exam\CreateExam.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\_QuestionLayout.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Student\Index.cshtml" />
+    <Content Include="Content\img\Sorting icons.psd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -439,6 +456,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\Controllers\ExamController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
@@ -491,9 +509,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Student\Controllers\" />
     <Folder Include="Areas\Student\Models\" />
-    <Folder Include="Areas\Student\Views\Shared\" />
     <Folder Include="Areas\Teacher\Models\" />
     <Folder Include="Views\HomePage\" />
   </ItemGroup>
