@@ -24,21 +24,14 @@ namespace OnlineSinav.Areas.Teacher.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult CreateExam(string formdata) // BURASI ŞU ANDA ÇALIŞMIYOR ELLEYENİ TERS ÇEVİRİR KÖTÜ HAREKETLERE MARUZ BIRAKIRIM.
-        { 
+        public ActionResult CreateExam(string formdata){ // BURASI ŞU ANDA ÇALIŞMIYOR ELLEYENİ TERS ÇEVİRİR KÖTÜ HAREKETLERE MARUZ BIRAKIRIM.
 
-            var abc = formdata;
-            formdata.Replace("'\'","");
+            var resultArray = JsonConvert.DeserializeObject<List<FormData>>(formdata);
 
-            var abcde = formdata;
-            examQuests eq = JsonConvert.DeserializeObject<examQuests>(formdata);
-
-            Questions[] examQuests = (Questions[])JsonConvert.DeserializeObject(formdata);
             
-            var abcd = formdata[1];
-            return RedirectToAction("index");
-
+            return View();
         }
     }
 }

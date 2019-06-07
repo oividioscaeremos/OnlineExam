@@ -8,15 +8,7 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
 {
     public class NewExam
     {
-        /*
-          Create.Table("Exam")
-                .WithColumn("id").AsInt32().Identity().PrimaryKey()
-                .WithColumn("exam_name").AsString(128)
-                .WithColumn("exam_time_from").AsDate()
-                .WithColumn("exam_time_to").AsDate()
-                .WithColumn("dept_id").AsInt32().ForeignKey("Department", "id").OnDelete(System.Data.Rule.Cascade);
-         */
-        [Display(Name ="Oluşturulacak Sınav Adı")]
+        [Display(Name = "Oluşturulacak Sınav Adı")]
         [Required(ErrorMessage = "Sınav adı belirtilmelidir.")]
         [DataType(DataType.Text)]
         public string exam_name { get; set; }
@@ -30,16 +22,37 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
         public DateTime dateTo { get; set; }
     }
 
-    public class Questions
-    {        
-        [Display(Name ="SORU ALANI")]
+    public class FormData
+    {
         public string question_string { get; set; }
         public string A { get; set; }
         public string B { get; set; }
         public string C { get; set; }
         public string D { get; set; }
         public string E { get; set; }
-        [Display(Name ="DOĞRU CEVAP")]
+        public string correct_answer { get; set; }
+
+        public FormData(string _question_string, string _A, string _B, string _C, string _D, string _E, string _correct_answer)
+        {
+            question_string = _question_string;
+            A = _A;
+            B = _B;
+            C = _C;
+            D = _D;
+            E = _E;
+            correct_answer = _correct_answer;
+        }
+    }
+    public class Questions
+    {
+        [Display(Name = "SORU ALANI")]
+        public string question_string { get; set; }
+        public string A { get; set; }
+        public string B { get; set; }
+        public string C { get; set; }
+        public string D { get; set; }
+        public string E { get; set; }
+        [Display(Name = "DOĞRU CEVAP")]
         public string correct_answer { get; set; }
     }
 

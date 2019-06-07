@@ -36,6 +36,7 @@
 <script type="text/javascript" src="../../../Content/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script type="text/javascript" src="../../../Content/lib/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script src="../../../Content/lib/form-component.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         var max_fields = 25;
@@ -63,24 +64,11 @@
 
 
         $("#submitForm").click(function () {
-            // var formdata = $("#ourForm").serializeArray() //.serialize() + "&urlofRequest=" + escape(window.location.href);
-            //question_string: $("#question_string").val(),
-            //    A: $("#A").val(),
-            //        B: $("#B").val(),
-            //            C: $("#C").val(),
-            //                D: $("#D").val(),
-            //                    E: $("#E").val(),
-            //                        correct_answer: $("#correct_answer").val()
-            var oneData = {
-                
-
-            };
-
-            var allData = [];
-            var i = 0, j = 0; // i formdata'daki verileri; j ise allData'daki verileri kontrol edecek
-            var ourformData = $("#ourForm").serializeArray();
-            //.serialize() + "&urlofRequest=" + escape(window.location.href);
-            console.log($("#ourForm").serializeArray());
+            let oneData = {};
+            let allData = [];
+            let stringifiedSTR = "[";
+            let i = 0, j = 0; // i formdata'daki verileri; j ise allData'daki verileri kontrol edecek
+            let ourformData = $("#ourForm").serializeArray(); // formu seri bir array haline getiriyor
             $.each(ourformData, function (a, element) {
                 if (i == 0) {
                     oneData[element.name] = element.value;
@@ -102,20 +90,30 @@
                     i++;
                 } else if (i == 6) {
                     oneData[element.name] = element.value;
-                    allData[j++] = oneData;
+                    allData[j] = oneData;
+                    if (j == 0) {
+                        stringifiedSTR += JSON.stringify(allData[j]);
+                        console.log("j == 0 için: " + stringifiedSTR);
+                        j++;
+                    } else {
+                        stringifiedSTR = stringifiedSTR + "," + JSON.stringify(allData[j]);
+                        console.log("j != 0 için: " + stringifiedSTR);
+                        j++;
+                    }
                     i = 0;
                 }
             });
-            
+
+            stringifiedSTR += "]";
+
             $.ajax({
                 type: "POST",
                 url: "/Teacher/Exam/CreateExam",
                 traditional: true,
                 dataType: "application/json",
-                data: { formdata: JSON.stringify(allData) },
+                data: { formdata: stringifiedSTR },
                 success: function (data) {
                     alert("BAŞARILI?");
-                    // Do something here when it is finished
                 }
             });
         });

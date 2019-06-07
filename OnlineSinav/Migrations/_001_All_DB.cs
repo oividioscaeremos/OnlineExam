@@ -43,6 +43,7 @@ namespace OnlineSinav.Migrations
                 .WithColumn("exam_name").AsString(128)
                 .WithColumn("exam_time_from").AsDate()
                 .WithColumn("exam_time_to").AsDate()
+                .WithColumn("exam_duration").AsString(5)
                 .WithColumn("dept_id").AsInt32().ForeignKey("Department", "id").OnDelete(System.Data.Rule.Cascade);
             //----------------------------------------------------------------
             //----------------------------------------------------------------
