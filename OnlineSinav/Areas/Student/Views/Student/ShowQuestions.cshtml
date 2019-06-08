@@ -1,0 +1,53 @@
+﻿@using OnlineSinav.Models
+@model IEnumerable<OnlineSinav.Models.Questions>
+
+
+<link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-reboot.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/css/style-responsive.css" rel="stylesheet" />
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<link href="~/Content/css/table-responsive.css" rel="stylesheet" />
+<link href="~/Content/css/to-do.css" rel="stylesheet" />
+<link href="~/Content/css/zabuto_calendar.css" rel="stylesheet" />
+
+
+
+@Html.Partial("_QuestionLayout");
+@*<div class="container">
+        <h3 style="text-align: center">-----Sorular Listesi------</h3><br />
+        <table class="table table-bordered">
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.id -) @item.QuestName
+
+
+
+                </td>
+
+
+
+                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> A-)@item.Answer1</a> </td>
+                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> B-)@item.Answer2</a> </td>
+                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> C-)@item.Answer3</a> </td>
+                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> D-)@item.Answer4</a> </td>
+                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> E-)@item.Answer5</a> </td>
+
+            </tr>
+
+            }
+
+        </table>
+
+
+    </div>*@
+
+
+

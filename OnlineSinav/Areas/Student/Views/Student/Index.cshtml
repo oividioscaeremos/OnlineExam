@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<OnlineSinav.Models.Exam>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,8 +33,8 @@
 <body>
     <section id="container">
         <!-- **********************************************************************************************************************************************************
-    TOP BAR CONTENT & NOTIFICATIONS
-    *********************************************************************************************************************************************************** -->
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
         <!--header start-->
         <header class="header black-bg">
 
@@ -42,16 +42,9 @@
             <a href="index.html" class="logo" style="margin-left: 100px"><b>Öğrenci SIn<span>av tablosu</span></b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
-                    <!-- settings end -->
-                    <!-- inbox dropdown start-->
-                    <!-- inbox dropdown end -->
-                    <!-- notification dropdown start-->
-                    <!-- notification dropdown end -->
-                </ul>
-                <!--  notification end -->
+
+                <ul class="nav top-menu"></ul>
+
             </div>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
@@ -62,16 +55,7 @@
                 </ul>
             </div>
         </header>
-        <!--header end-->
-        <!-- **********************************************************************************************************************************************************
-    MAIN SIDEBAR MENU
-    *********************************************************************************************************************************************************** -->
-        <!--sidebar start-->
-        <!--sidebar end-->
-        <!-- **********************************************************************************************************************************************************
-    MAIN CONTENT
-    *********************************************************************************************************************************************************** -->
-        <!--main content start-->
+
         <section id="main-content" style="margin-left: 100px; margin-right: 100px">
             <section class="wrapper">
                 <h3><i class="fa fa-angle-right"></i> Öğrenci Sistemi</h3>
@@ -83,72 +67,31 @@
                             <table class="table">
                                 <thead>
 
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Ders Adı</th>
-                                        <th>Sınav Tarihi</th>
-                                        <th>Sınav Notu</th>
-                                        <th>Sınav Notu</th>
-
-
-
-                                    </tr>
+                                <th>#</th>
+                                <th>Ders Adı</th>
+                                <th>Sınav Tarihi</th>
+                                <th>Sınav Notu</th>
+                                <th>Sınav Notu</th>
+                                <tr></tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-theme02" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
+                                @foreach (var item in Model)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>@item.id</td>
+                                            <td>@item.ExamName</td>
+                                            <td>@item.dateFrom</td>
+                                            <td>@item.dateTo</td>
+                                            <td><button type="button" class="btn btn-round btn-theme02" name="redirect" onclick="location.href = '@Url.Action("ShowQuestions",new {id = item.id})'">Sınava gir</button></td>
+                                            <td>Sınav Notu yazacak</td>
 
-                                    </tr>
+                                        </tr>
 
 
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-warning" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-info" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-success" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-danger" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-primary" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Ders Adı yazacak</td>
-                                        <td>Sınav Tarihi yazacak</td>
-                                        <td><button type="button" class="btn btn-round btn-theme" name="redirect" onclick="redirect()">Sınava gir</button></td>
-                                        <td>Sınav Notu yazacak</td>
-                                    </tr>
-                                </tbody>
+                                    </tbody>
+
+                                }
 
                             </table>
 
@@ -161,13 +104,8 @@
                 <!-- /row -->
             </section>
         </section>
-        
-        <script type="text/javascript">
-            function redirect() {
-                
-                setTimeout('window.location.href="/Student/Student/questionsView"', 0);
-            }
-        </script>
+
+       
 
         <!-- /MAIN CONTENT -->
         <!--main content end-->
