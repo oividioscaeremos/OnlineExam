@@ -46,19 +46,18 @@
             <form class="form-login" method="post"> 
                                 
                     @Html.ValidationSummary()
-                    <h2 class="form-login-heading">sign in now</h2>
+                    <h2 class="form-login-heading">GİRİŞ YAP</h2>
                     <div class="login-wrap">
                         @Html.LabelFor(f => f.school_number)
-                        @Html.TextBoxFor(f => f.school_number, new { placeholder = "Numara", @class = "form-control", onchange = "UserCheck()" })
+                        @Html.TextBoxFor(f => f.school_number, new { placeholder = "Numara Giriniz", @class = "form-control", onchange = "UserCheck()", @maxlength = "10",name = "school_number",id = "school_number" })
                         <br>
                         <div class="row">
                             <label class="col-sm-2" style="height: 10px">
                                 </label>
                             <p id ="Status"></p>
-
-                        </div>
+                            </div>
                         @Html.LabelFor(f => f.password)
-                        @Html.PasswordFor(f => f.password, new { placeholder = "Şifre", @class = "form-control", onchange ="UserCheck()"})
+                        @Html.PasswordFor(f => f.password, new { placeholder = "Şifre giriniz", @class = "form-control", @maxlength = "12" })
                         <br>
                         <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Giriş yap</button>
                     </div>
@@ -83,7 +82,7 @@
         $("#Status").html("Bekleyiniz...");
         $.post("@Url.Action("CheckUsernameAvailability", "Auth")",
             {
-                userdata: $("#school_number").val()
+                userdata: $("#school_number").val
             },
             function (data) {
                 if (data == 0) {

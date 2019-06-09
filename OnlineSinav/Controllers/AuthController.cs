@@ -56,38 +56,25 @@ namespace OnlineSinav.Controllers
             else return RedirectToAction("Index", "Exam", new { area = "Teacher" });
             
         }
-
+        
         public JsonResult CheckUsernameAvailability(string userdata)
         {   
             System.Threading.Thread.Sleep(200);
-            var SearchData = Database.Session.Query<Users>().Where(x => x.SchoolNumber == userdata).FirstOrDefault();
+            var SearchData = Database.Session.Query<Users>().Where(x => x.SchoolNumber == userdata).SingleOrDefault();
+           
             if (SearchData != null)
             {
                 return Json(1);
             }
 
-            else
-            {
-                return Json(0);
-            }
-           
-
-
-
+            else { return Json(0); }
+                    
         }
         
-
-
-
         public ActionResult Logout()
         {
-            
-            
             FormsAuthentication.SignOut();
             return RedirectToAction("Logout", "Auth","Logout");
         }
-
-
-
-    }
+        }
 }

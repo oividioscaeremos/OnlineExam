@@ -12,7 +12,7 @@ namespace OnlineSinav.Areas.Student.Controllers
 {
     public class StudentController : Controller
     {
-        private object questionalias;
+       
 
         // GET: Student/Student
         public ActionResult Index()
