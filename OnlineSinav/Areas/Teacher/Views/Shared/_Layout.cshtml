@@ -57,23 +57,18 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-
-
                     <li class="mt">
                         <a href="@Url.Action("Index","Users", new { area = "Admin" })">
                             <i class="fa fa-dashboard"></i>
                             <span>Öğretim Görevlileri</span>
-
                         </a>
                         <a href="@Url.Action("ViewStudents","Users", new { area = "Admin" })">
                             <i class="fa fa-dashboard"></i>
                             <span>Öğrenciler </span>
-
                         </a>
                         <a href="@Url.Action("ViewAdmin","Users", new { area = "Admin" })">
                             <i class="fa fa-dashboard"></i>
                             <span>Adminler </span>
-
                         </a>
                     </li>
                     <li class="sub-menu">
@@ -86,7 +81,16 @@
 
                         </ul>
                     </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-desktop"></i>
+                            <span>Sınav İşlem</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="@Url.Action("AssignExam","Exam",new { area = "Teacher", @id = (Database.Session.Query<OnlineSinav.Models.Users>().FirstOrDefault(u=>u.SchoolNumber == HttpContext.Current.User.Identity.Name).id) })">Yeni Kullanıcı Oluştur</a></li>
 
+                        </ul>
+                    </li>
                     <!-- sidebar menu end-->
             </div>
         </aside>

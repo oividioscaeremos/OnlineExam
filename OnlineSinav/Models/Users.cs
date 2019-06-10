@@ -10,12 +10,14 @@ namespace OnlineSinav.Models
         public virtual int id { get; set; }
         public virtual Roles Role { get; set; }
         public virtual IList<Department> depts { get; set; }
+        public virtual IList<Exam> exams { get; set; }
         public virtual string Name { get; set; }
         public virtual string SchoolNumber { get; set; }
         public virtual string Password { get; set; }
 
         public Users() {
             depts = new List<Department>();
+            exams = new List<Exam>();
         }
 
         public virtual void SetPassword(string password)
@@ -51,6 +53,10 @@ namespace OnlineSinav.Models
                 x.Key(k => k.Column("user_id"));
             }, x => x.ManyToMany(k => k.Column("dept_id")));
 
+            Bag(x => x.exams, x => {
+                x.Table("exam_student");
+                x.Key(k => k.Column("student_id"));
+            }, x => x.ManyToMany(k => k.Column("exam_id")));
         }
     }
 }

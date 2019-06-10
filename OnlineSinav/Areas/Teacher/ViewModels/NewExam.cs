@@ -1,8 +1,10 @@
-﻿using System;
+﻿using OnlineSinav.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OnlineSinav.Areas.Teacher.ViewModels
 {
@@ -70,8 +72,28 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
         public string correct_answer { get; set; }
     }
 
-    public class examQuests
+    //public class examQuests
+    //{
+    //    public List<Questions> questions { get; set; }
+    //}
+
+    public class TeacherIndexViewModel
     {
-        public List<Questions> questions { get; set; }
+        public IList<Models.Exam> exams;
+        public Users teacher;
     }
+
+    public class AssignExamIndex
+    {
+        public int selectedExamID { get; set; }
+
+        public List<Models.Users> studentsNotChoosen;
+        public List<Models.Users> studentsChoosed;
+
+        [Display(Name = "Ad Soyad")]
+        public string name { get; set; }
+        [Display(Name = "Okul Numarası")]
+        public string school_number { get; set; }
+    }
+    
 }

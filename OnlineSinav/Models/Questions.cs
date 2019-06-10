@@ -9,7 +9,7 @@ namespace OnlineSinav.Models
 {
     public class Questions
     {
-        public Questions() { }
+
         public virtual int id { get; set; }
         public virtual string QuestName { get; set; }
         public virtual string Answer1 { get; set; }
@@ -19,6 +19,13 @@ namespace OnlineSinav.Models
         public virtual string Answer5 { get; set; }
         public virtual string TrueAnswer { get; set; }
         public virtual Department dept_id { get; set; }
+        public virtual IList<Exam> ExamQuestions { get; set; }
+
+        public Questions()
+        {
+            ExamQuestions = new List<Exam>();
+
+        }
 
     }
 
@@ -41,6 +48,11 @@ namespace OnlineSinav.Models
 
             Property(x => x.TrueAnswer, map => { map.Column("true_answer"); map.NotNullable(true); });
             ManyToOne(x => x.dept_id, map => { map.Column("dept_id"); map.Cascade(Cascade.Remove); });
+
+            Bag(x => x.ExamQuestions, x => {
+                x.Table("exam_quest");
+                x.Key(k => k.Column("quest_id"));
+            }, x => x.ManyToMany(k => k.Column("exam_id")));
         }
     }
 }

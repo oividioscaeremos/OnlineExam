@@ -308,6 +308,7 @@
     <Content Include="Content\lib\chartjs-conf.js" />
     <Content Include="Content\lib\ckeditor\ckeditor.js" />
     <Content Include="Content\lib\common-scripts.js" />
+    <Content Include="Content\lib\dataTables.bootstrap.min.js" />
     <Content Include="Content\lib\DeleteModal.js" />
     <Content Include="Content\lib\dropzone\css\dropzone.css" />
     <Content Include="Content\lib\dropzone\dropzone.js" />
@@ -360,6 +361,7 @@
     <Content Include="Content\lib\jquery-easy-pie-chart\jquery.easy-pie-chart.js" />
     <Content Include="Content\lib\jquery-ui-1.9.2.custom.min.js" />
     <Content Include="Content\lib\jquery.backstretch.min.js" />
+    <Content Include="Content\lib\jquery.dataTables.min.js" />
     <Content Include="Content\lib\jquery.dcjqaccordion.2.7.js" />
     <Content Include="Content\lib\jquery.nicescroll.js" />
     <Content Include="Content\lib\jquery.scrollTo.min.js" />
@@ -437,6 +439,8 @@
     <Content Include="Areas\Student\Views\Student\questionsView.cshtml" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Teacher\Views\Exam\AssignExam.cshtml" />
+    <Content Include="Areas\Teacher\Views\Shared\_AssignStudentsLayout.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

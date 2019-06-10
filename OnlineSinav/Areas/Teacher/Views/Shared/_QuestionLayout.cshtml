@@ -6,8 +6,8 @@
         <div class="col-lg-12">
             <hr />
 
-            <button type="button" class="btn btn-danger delete pull-right"><i class="fa-plus">  SORUYU SİL</i></button>
-            <button type="button" class="btn btn-success newQuest pull-right"><i class="fa-plus">  YENİ SORU EKLE</i></button>
+            <button type="button" class="btn btn-danger delete pull-right" style="margin-bottom:10px;"><i class="fa-plus">  SORUYU SİL</i></button>
+            <button type="button" class="btn btn-success newQuest pull-right" style="margin-bottom:10px;"><i class="fa-plus">  YENİ SORU EKLE</i></button>
             @Html.LabelFor(m => m.question_string, new { @class = "control-label col-md-3" })
             @Html.TextAreaFor(m => m.question_string, new { @class = "form-control", placeholder = "Soru buraya yazılacak.", style = "max-width:100%; min-width:100%" })
         </div>

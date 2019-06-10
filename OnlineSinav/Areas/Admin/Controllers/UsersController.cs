@@ -100,14 +100,10 @@ namespace OnlineSinav.Areas.Admin.Controllers
             if (userRole == "admin")
             {
                 return RedirectToAction("ViewAdmin");
-
-
             }
             else if (userRole == "teacher")
             {
                 return RedirectToAction("Index");
-
-
             }
             else
                 return RedirectToAction("ViewStudents");

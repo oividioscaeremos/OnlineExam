@@ -1,7 +1,48 @@
-﻿
+﻿@model OnlineSinav.Areas.Teacher.ViewModels.TeacherIndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index TEACHER</h2>
+<div class="row mt">
+    <div class="col-md-12">
+        <div class="content-panel">
+            <h4><i class="fa fa-angle-right"></i> Advanced Table</h4><hr><table class="table table-striped table-advance table-hover">
 
+                <button type="button" class="btn btn-success pull-right" style="margin-bottom:10px;"
+                        onclick="location.href='@Url.Action("CreateExam","Exam")'">
+                    <i class="fa-plus">  YENİ SINAV OLUŞTUR</i>
+                </button>
+                <thead>
+                    <tr>
+                        <th><i class="fa fa-bullhorn"></i> SINAV ADI</th>
+                        <th class="hidden-phone"><i class="fa fa-calendar"></i> SINAV TARİHLERİ (BAŞLANGIÇ)</th>
+                        <th class="hidden-phone"><i class="fa fa-calendar"></i> SINAV TARİHLERİ (BİTİŞ)</th>
+                        <th><i class="fa fa-clock-o"></i> Sınav Süresi</th>
+                        <th><i class=" fa fa-edit"></i> İŞLEMLER</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var exam in Model.exams)
+                    {
+                        <tr>
+                            <td>@exam.ExamName</td>
+                            <td>@exam.dateFrom.ToShortDateString()</td>
+                            <td>@exam.dateTo.ToShortDateString()</td>
+                            <td>@exam.ExamDuration DK</td>
+                            <td>
+                                <button class="btn btn-success btn-xs"><i class="fa fa-check"></i> Düzenle</button>
+                                <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("AssignExam","Exam", new {teacherID = Model.teacher.id, examID = exam.id })'"><i class="fa fa-pencil"></i> Sınava Öğrenci Ata</button>
+                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Sınavı Sil</button>
+                                <button class="btn btn-dark btn-xs"><i class="fa fa-trash-o "></i> Sonuçları Görüntüle</button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /content-panel -->
+    </div>
+    <!-- /col-md-12 -->
+</div>

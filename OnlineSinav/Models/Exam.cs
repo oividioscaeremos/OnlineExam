@@ -13,6 +13,7 @@ namespace OnlineSinav.Models
         public virtual DateTime dateFrom { get; set; }
         public virtual DateTime dateTo { get; set; }
         public virtual Department Department { get; set; }
+        public virtual Users teacher { get; set; }
         public virtual string ExamName { get; set; }
         public virtual string ExamDuration { get; set; }
 
@@ -40,6 +41,7 @@ namespace OnlineSinav.Models
             Property(x => x.ExamDuration, map => { map.Column("exam_duration"); map.NotNullable(true); });
 
             ManyToOne(x => x.Department, map => { map.Column("dept_id"); map.Cascade(Cascade.Remove); });
+            ManyToOne(x => x.teacher, map => { map.Column("teacher_id"); map.Cascade(Cascade.Remove); });
 
             Bag(x => x.ExamQuestions, x => {
                 x.Table("exam_quest");

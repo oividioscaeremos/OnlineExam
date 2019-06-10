@@ -1,0 +1,58 @@
+﻿@model OnlineSinav.Areas.Teacher.ViewModels.AssignExamIndex
+<div class="row mt">
+    <div class="col-md-12">
+        <div class="content-panel">
+            <h4><i class="fa fa-angle-right"></i> SINAVA EKLENMEMİŞ ÖĞRENCİLER</h4><hr><table class="table table-striped table-bordered" id="studentsTableAdded">
+                <thead>
+                    <tr>
+                        <th>OKUL NUMARASI</th>
+                        <th class="hidden-phone"><i class="fa fa-question-circle"></i> @Html.LabelFor(m => m.name)</th>
+                        <th>EKLE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.studentsNotChoosen != null)
+                    {
+                        foreach (var student in Model.studentsNotChoosen)
+                        {
+                            <tr>
+                                <td>@student.SchoolNumber</td>
+                                <td>@student.Name</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-xs assignStd" data-id="@student.id" id="@student.id"><i class="fa fa-check"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>            
+            <h4><i class="fa fa-angle-right"></i> SINAVA EKLENMİŞ ÖĞRENCİLER</h4><hr><table class="table table-striped table-bordered" id="studentsTableNotAdded">
+                <thead>
+                    <tr>
+                        <th>OKUL NUMARASI</th>
+                        <th class="hidden-phone"><i class="fa fa-question-circle"></i> @Html.LabelFor(m => m.name)</th>
+                        <th>ÇIKART</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.studentsChoosed != null)
+                    {
+                        foreach (var student in Model.studentsChoosed)
+                        {
+                            <tr>
+                                <td>@student.SchoolNumber</td>
+                                <td>@student.Name</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-xs removeStd" data-id="@student.id"><i class="fa fa-history" id="btn-history"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /content-panel -->
+    </div>
+    <!-- /col-md-12 -->
+</div>
+

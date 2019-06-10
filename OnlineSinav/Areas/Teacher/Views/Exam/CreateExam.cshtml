@@ -100,7 +100,6 @@
             }
         });
 
-
         $("#submitForm").click(function () {
             let oneData = {};
             let allData = [];
@@ -147,11 +146,16 @@
                 type: "POST",
                 url: "/Teacher/Exam/CreateExam",
                 traditional: true,
-                dataType: "application/json",
                 data: { formdata: stringifiedSTR, examDetails: JSON.stringify(examsDetails) },
                 success: function (data) {
-                    alert("BAŞARILI?");
-                }
+
+                    window.location.assign("/Teacher/Exam");
+                },
+                error: function (xhr) {
+                    //debugger;  
+                    console.log(xhr.responseText);
+                    alert("Error has occurred..");
+                }  
             });
         });
     });
