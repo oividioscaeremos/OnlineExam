@@ -46,13 +46,18 @@
             <form class="form-login" method="post"> 
                                 
                     @Html.ValidationSummary()
-                    <h2 class="form-login-heading">sign in now</h2>
+                    <h2 class="form-login-heading">GİRİŞ YAP</h2>
                     <div class="login-wrap">
                         @Html.LabelFor(f => f.school_number)
-                        @Html.TextBoxFor(f => f.school_number, new { placeholder = "Numara", @class = "form-control" })
+                        @Html.TextBoxFor(f => f.school_number, new { placeholder = "Numara Giriniz", @class = "form-control", onchange = "UserCheck()", @maxlength = "10",name = "school_number",id = "school_number" })
                         <br>
+                        <div class="row">
+                            <label class="col-sm-2" style="height: 10px">
+                                </label>
+                            <p id ="Status"></p>
+                            </div>
                         @Html.LabelFor(f => f.password)
-                        @Html.PasswordFor(f => f.password, new { placeholder = "Şifre", @class = "form-control" })
+                        @Html.PasswordFor(f => f.password, new { placeholder = "Şifre giriniz", @class = "form-control", @maxlength = "12" })
                         <br>
                         <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Giriş yap</button>
                     </div>
@@ -67,11 +72,31 @@
     <!--BACKSTRETCH-->
     <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
     <script type="text/javascript" src="../../Content/lib/jquery.backstretch.min.js"></script>
-    <script>
-        $.backstretch("../../Content/img/arkaplan9.jpg", {
-            speed: 500
-        });
-    </script>
+<script>
+    $.backstretch("../../Content/img/arkaplan9.jpg", {
+        speed: 500
+    });
+</script>
+<script>
+    function UserCheck() {
+        $("#Status").html("Bekleyiniz...");
+        $.post("@Url.Action("CheckUsernameAvailability", "Auth")",
+            {
+                userdata: $("#school_number").val
+            },
+            function (data) {
+                if (data == 0) {
+                    $("#Status").html('<font color="Red">Kayıtlı olmayan numara!</font>');
+                    $("#school_number").css("border-color", "Red");
+
+                }
+                else {
+                    $("#Status").html('<font color="Green">Kayıtlı numara!</font>');
+                    $("#school_number").css("border-color", "Green");
+                }
+            });
+    }
+</script>
 </body>
 
 </html>

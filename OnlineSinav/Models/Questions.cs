@@ -24,7 +24,7 @@ namespace OnlineSinav.Models
         public Questions()
         {
             ExamQuestions = new List<Exam>();
-
+            
         }
 
     }
