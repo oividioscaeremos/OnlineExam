@@ -18,9 +18,13 @@ namespace OnlineSinav.Areas.Teacher.Controllers
         // farklı bir action'a gönderecek.
         public ActionResult Index()
         {
-            var _teacher = Database.Session.Query<Users>().FirstOrDefault(u => u.SchoolNumber == HttpContext.User.Identity.Name);
+            Users _teacher = new Users();
+            IList<Exam> thisTeachersExams;
 
-            var thisTeachersExams = Database.Session.Query<Exam>().Where(e => e.teacher.id == _teacher.id).ToList();
+
+            _teacher = Database.Session.Query<Users>().FirstOrDefault(u => u.SchoolNumber == HttpContext.User.Identity.Name);
+
+            thisTeachersExams = Database.Session.Query<Exam>().Where(e => e.teacher.id == _teacher.id).ToList();
 
             return View(new TeacherIndexViewModel
             {
@@ -37,6 +41,7 @@ namespace OnlineSinav.Areas.Teacher.Controllers
         [HttpPost]
         public void CreateExam(string formdata, string examDetails)
         {
+
 
             var questionsArray = JsonConvert.DeserializeObject<List<FormData>>(formdata);
             var examDetailsArray = JsonConvert.DeserializeObject<List<GetFormData>>(examDetails);
