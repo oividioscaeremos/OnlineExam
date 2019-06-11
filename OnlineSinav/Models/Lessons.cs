@@ -23,7 +23,7 @@ namespace OnlineSinav.Models
             Lazy(true);
             Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Identity); });
             Property(x => x.LessonName, map => { map.Column("lesson_name"); map.NotNullable(true); });
-            ManyToOne(x => x.Department, map => { map.Column("dept_id"); map.Cascade(Cascade.Remove); });
+            ManyToOne(x => x.Department, map => { map.Column("dept_id"); map.Cascade(Cascade.None); });
         }
     }
 }

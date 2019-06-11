@@ -13,6 +13,12 @@
                     @Html.Partial("_AssignStudentsLayout", Model)
                 </div>
             </form>
+            <form class="form-horizontal style-form col-lg-12">
+                <button type="button" class="btn btn-primary" 
+                        onclick="location.href='@Url.Action("Index","Exam", new { area = "Teacher" })'" 
+                        id="submitForm"
+                        style="margin-top:10px; width:100%; height:50px;">İŞLEMİ BİTİR</button>
+            </form>
         </div>
     </div>
     <!-- col-lg-12-->
