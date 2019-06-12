@@ -27,7 +27,13 @@ namespace OnlineSinav.Models
 
         public virtual bool CheckPassword(string pwd)
         {
+            if (pwd == null)
+            {
+                return false;
+            }
+            else { 
             return BCrypt.Net.BCrypt.Verify(pwd, Password);
+            }
             //var pass = BCrypt.Net.BCrypt.Verify(pwd, Password);
             //return BCrypt.Net.BCrypt.Verify(pwd, Password);
         }

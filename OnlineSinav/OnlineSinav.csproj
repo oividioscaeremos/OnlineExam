@@ -211,6 +211,8 @@
     <Content Include="Content\img\back_enabled_hover.png" />
     <Content Include="Content\img\blog-bg.jpg" />
     <Content Include="Content\img\checkbox-gray.png" />
+    <Content Include="Content\img\clock-animated-gif-23.gif" />
+    <Content Include="Content\img\clock.png" />
     <Content Include="Content\img\details_close.png" />
     <Content Include="Content\img\details_open.png" />
     <Content Include="Content\img\favicon.ico" />
@@ -232,6 +234,7 @@
     <Content Include="Content\img\instagram.jpg" />
     <Content Include="Content\img\lorde.jpg" />
     <Content Include="Content\img\mask.png" />
+    <Content Include="Content\img\MiserableSentimentalCusimanse-small.gif" />
     <Content Include="Content\img\ny.jpg" />
     <Content Include="Content\img\portfolio\port01.jpg" />
     <Content Include="Content\img\portfolio\port02.jpg" />
@@ -441,6 +444,7 @@
     <Content Include="Areas\Teacher\Views\Exam\AssignExam.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\_AssignStudentsLayout.cshtml" />
     <Content Include="Areas\Student\Views\Student\ShowQuestions.cshtml" />
+    <Content Include="Areas\Student\Views\Student\ExamEnd.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -15,10 +15,13 @@ namespace OnlineSinav.Areas.Student.Controllers
        
 
         // GET: Student/Student
-        public ActionResult Index()
+        public ActionResult Index() 
         {
-            var loggedUser = Database.Session.Query<Users>().Where(c => c.SchoolNumber == User.Identity.Name).FirstOrDefault();
-            var result = Database.Session.QueryOver<Exam>().Right.JoinQueryOver<Users>(x => x.ExamStudents)
+
+            
+            IList<Exam> result;
+            var loggedUser = Database.Session.Query<Users>().FirstOrDefault(c => c.SchoolNumber == HttpContext.User.Identity.Name);
+            result = Database.Session.QueryOver<Exam>().Right.JoinQueryOver<Users>(x => x.ExamStudents)
                 .Where(c => c.id == loggedUser.id ).List();
             return View(result);
         }
@@ -31,6 +34,16 @@ namespace OnlineSinav.Areas.Student.Controllers
                 .Where(c => c.id== id).List();
 
             return View(result);
+
+        }
+
+        public ActionResult ExamEnd()
+        {
+
+
+
+
+            return View();
 
         }
 
