@@ -70,7 +70,9 @@
                                 <th>#</th>
                                 <th>Ders Adı</th>
                                 <th>Sınav Tarihi</th>
-                                <th>Sınav Notu</th>
+                                <th>Sınav Başlama Saati</th>
+                                <th>Sınav Süresi</th>
+                                <th>Sınav Gir</th>
                                 <th>Sınav Notu</th>
                                 <tr></tr>
                                 </thead>
@@ -80,9 +82,10 @@
                                         <tr>
                                             <td>@item.id</td>
                                             <td>@item.ExamName</td>
-                                            <td>@item.dateFrom</td>
-                                            <td>@item.dateTo</td>
-                                            <td><button type="button" class="btn btn-round btn-theme02" name="redirect" onclick="location.href = '@Url.Action("ShowQuestions",new {id = item.id})'">Sınava gir</button></td>
+                                            <td>@item.examDate.ToShortDateString()</td>
+                                            <td>@item.examStart.ToShortTimeString()</td>
+                                            <td>@item.ExamDuration dk</td>
+                                            <td><button type="button" class="btn btn-round btn-theme02" name="redirect" onclick="location.href = '@Url.Action("ShowQuestions",new {exam_id = item.id})'">Sınava gir</button></td>
                                             <td>Sınav Notu yazacak</td>
 
                                         </tr>

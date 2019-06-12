@@ -507,7 +507,6 @@
     <Content Include="Areas\Teacher\Views\Exam\AssignExam.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\_AssignStudentsLayout.cshtml" />
     <Content Include="Areas\Student\Views\Student\ShowQuestions.cshtml" />
-    <Content Include="Areas\Student\Views\Student\ExamEnd.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -532,6 +531,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\Student\ViewModels\Exam.cs" />
     <Compile Include="Areas\Teacher\Controllers\ExamController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\ViewModels\NewExam.cs" />

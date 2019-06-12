@@ -59,7 +59,7 @@ namespace OnlineSinav.Controllers
         public JsonResult CheckUsernameAvailability(string userdata)
         {   
             System.Threading.Thread.Sleep(200);
-            var SearchData = Database.Session.Query<Users>().Where(x => x.SchoolNumber == userdata).SingleOrDefault();
+            var SearchData = Database.Session.Query<Users>().FirstOrDefault(x => x.SchoolNumber == userdata);
            
             if (SearchData != null)
             {

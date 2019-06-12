@@ -24,7 +24,7 @@ namespace OnlineSinav
             var config = new Configuration();
 
             var mapper = new ModelMapper();
-            mapper.AddMapping<UsersMap>();
+            mapper.AddMapping<Users.UsersMap>();
             mapper.AddMapping<RolesMap>();
             mapper.AddMapping<QuestionsMap>();
             mapper.AddMapping<LessonsMap>();

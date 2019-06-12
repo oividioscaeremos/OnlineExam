@@ -15,7 +15,8 @@ namespace OnlineSinav.Models
         public virtual string SchoolNumber { get; set; }
         public virtual string Password { get; set; }
 
-        public Users() {
+        public Users()
+        {
             depts = new List<Department>();
             exams = new List<Exam>();
         }
@@ -31,35 +32,44 @@ namespace OnlineSinav.Models
             {
                 return false;
             }
-            else {
-            return BCrypt.Net.BCrypt.Verify(pwd, Password);
+            else
+            {
+                return BCrypt.Net.BCrypt.Verify(pwd, Password);
+            }
         }
-    }
 
-    public class UsersMap : ClassMapping<Users>
-    {
-        public UsersMap()
+        public class UsersMap : ClassMapping<Users>
         {
-            Schema("onlineexam");
-            Id(x => x.id, map => map.Generator(Generators.Identity));
-            Property(x => x.Name, map => map.NotNullable(true));
-            Property(x => x.SchoolNumber, map => { map.Column("school_number"); map.NotNullable(true); });
-            Property(x => x.Password, map => map.NotNullable(true));
+            public UsersMap()
+            {
+                Schema("onlineexam");
+                Id(x => x.id, map => map.Generator(Generators.Identity));
+                Property(x => x.Name, map => map.NotNullable(true));
+                Property(x => x.SchoolNumber, map =>
+                {
+                    map.Column("school_number");
+                    map.NotNullable(true);
+                });
+                Property(x => x.Password, map => map.NotNullable(true));
 
-            ManyToOne(x => x.Role, x => {
-                x.Column("rol_id");
-                x.NotNullable(true);
-            });
+                ManyToOne(x => x.Role, x =>
+                {
+                    x.Column("rol_id");
+                    x.NotNullable(true);
+                });
 
-            Bag(x => x.depts, x => {
-                x.Table("dept_user");
-                x.Key(k => k.Column("user_id"));
-            }, x => x.ManyToMany(k => k.Column("dept_id")));
+                Bag(x => x.depts, x =>
+                {
+                    x.Table("dept_user");
+                    x.Key(k => k.Column("user_id"));
+                }, x => x.ManyToMany(k => k.Column("dept_id")));
 
-            Bag(x => x.exams, x => {
-                x.Table("exam_student");
-                x.Key(k => k.Column("exam_id"));
-            }, x => x.ManyToMany(k => k.Column("student_id")));
+                Bag(x => x.exams, x =>
+                {
+                    x.Table("exam_student");
+                    x.Key(k => k.Column("exam_id"));
+                }, x => x.ManyToMany(k => k.Column("student_id")));
+            }
         }
     }
 }

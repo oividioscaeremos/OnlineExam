@@ -1,53 +1,102 @@
 ﻿@using OnlineSinav.Models
-@model IEnumerable<OnlineSinav.Models.Questions>
+@model OnlineSinav.Areas.Student.ViewModels.Exam
+@{
 
-
-<link href="~/Content/bootstrap-grid.css" rel="stylesheet" />
-<link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" />
-<link href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
-<link href="~/Content/bootstrap-reboot.min.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/Site.css" rel="stylesheet" />
-<link href="~/Content/css/style-responsive.css" rel="stylesheet" />
-<link href="~/Content/css/style.css" rel="stylesheet" />
-<link href="~/Content/css/table-responsive.css" rel="stylesheet" />
-<link href="~/Content/css/to-do.css" rel="stylesheet" />
-<link href="~/Content/css/zabuto_calendar.css" rel="stylesheet" />
+    var endTime = DateTime.UtcNow.AddSeconds(Model.examduration * 60);
+    var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
 
 
 
+}
+
+
+
+<div>
+    Kalan zaman  <span id="minRemaining"></span>:<span id="secRemaining">  </span>
+    <img src="~/Content/img/clock-animated-gif-23.gif" width="100" height="75" style="margin-left:50px" />
+    
+</div>
 @Html.Partial("_QuestionLayout");
-@*<div class="container">
-        <h3 style="text-align: center">-----Sorular Listesi------</h3><br />
-        <table class="table table-bordered">
 
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @item.id -) @item.QuestName
+<script>
+    var remSeconds = @timeRemaining;
+    var secondsCounter = 60 - (remSeconds % 60);
+    function startTick() {
+        document.getElementById('secRemaining').innerText = secondsCounter;
+        document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
 
-
-
-                </td>
+        var _tick = setInterval(function() {
 
 
 
-                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> A-)@item.Answer1</a> </td>
-                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> B-)@item.Answer2</a> </td>
-                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> C-)@item.Answer3</a> </td>
-                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> D-)@item.Answer4</a> </td>
-                <td><a href="#" data-toggle="popover" data-trigger="hover" id="@item.id"> E-)@item.Answer5</a> </td>
+            document.getElementById('secRemaining').innerText = secondsCounter;
+            document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
+            if (secondsCounter == 0) {
+                secondsCounter = 60;
+            }
+            remSeconds = remSeconds - 1;
+            secondsCounter = secondsCounter - 1;
 
-            </tr>
+
+
+        }, 1000);
+
+    }
+
+    startTick();
+
+    function saveForward(sender) {
+
+        $('#direction').val('forward');
+        document.getElementById('form').submit;
+
+    }
+    function saveBackward(sender) {
+
+        $('#direction').val('backward');
+        document.getElementById('form').submit;
+
+    }
+</script>
+<script type="text/javascript">
+    function ModifyCheckBoxes(id) {
+        if (document.getElementById(id).checked) {
+            if (id == "#Answer1") {
+                document.getElementById("#Answer2").checked = false;
+                document.getElementById("#Answer3").checked = false;
+                document.getElementById("#Answer4").checked = false;
+                document.getElementById("#Answer5").checked = false;
+
+            } else if (id == "#Answer2") {
+                document.getElementById("#Answer1").checked = false;
+                document.getElementById("#Answer3").checked = false;
+                document.getElementById("#Answer4").checked = false;
+                document.getElementById("#Answer5").checked = false;
 
             }
+            else if (id == "C") {
+                document.getElementById("A").checked = false;
+                document.getElementById("B").checked = false;
+                document.getElementById("D").checked = false;
+                document.getElementById("E").checked = false;
 
-        </table>
+            } else if (id == "D") {
+                document.getElementById("A").checked = false;
+                document.getElementById("C").checked = false;
+                document.getElementById("B").checked = false;
+                document.getElementById("E").checked = false;
 
+            } else if (id == "E") {
+                document.getElementById("A").checked = false;
+                document.getElementById("C").checked = false;
+                document.getElementById("D").checked = false;
+                document.getElementById("B").checked = false;
 
-    </div>*@
+            }
+        };
+    };
+
+</script>
 
 
 

@@ -1,23 +1,10 @@
 ﻿@*@model OnlineSinav.Areas.Student.ViewModels.Questions*@
 @using OnlineSinav.Models
-@model IEnumerable<OnlineSinav.Models.Questions>
-
-@{
-
-    
-    var endTime = DateTime.UtcNow.AddMinutes(90);
-    var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
+@model OnlineSinav.Areas.Student.ViewModels.Exam
 
 
 
-}
-<div>Kalan zaman  <span id ="minRemaining"></span>:<span id ="secRemaining">  </span>
-       <img src="~/Content/img/clock-animated-gif-23.gif" width= "100" height="75" style="margin-left:50px"/>
-                                                   
-
-    </div>
-
-@foreach (var item in Model)
+@foreach (var item in Model.questions)
 {
     <div id="newForm">
         <div class="form-group" style="margin-right: 0px;">
@@ -28,7 +15,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="A">A <input type="checkbox" name="answer1" value="@item.Answer1" style="margin-left: 20px"/>
+                <label class="col-sm-2 col-sm-2 control-label" for="A">A <input type="checkbox" name="answer1" value="@item.Answer1" style="margin-left: 20px" id="@item.Answer1" onchange="ModifyCheckBoxes('@item.Answer1')"/>
                     </label>
                 <label class="form-control" cols="20"  rows ="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer1</label>
             </div>
@@ -36,20 +23,20 @@
         <div class="form-group">
 
             <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="B">B <input type="checkbox" name="answer2" value="@item.Answer2" style="margin-left: 20px" /></label>
+                <label class="col-sm-2 col-sm-2 control-label" for="B">B <input type="checkbox" name="answer2" value="@item.Answer2" style="margin-left: 20px" id="@item.Answer2" onchange="ModifyCheckBoxes('@item.Answer2')"/></label>
                 <label class="form-control" cols="20"  rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer2</label>
             </div>
         </div>
         <div class="form-group">
 
             <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="C">C <input type="checkbox" name="answer3" value="@item.Answer3" style="margin-left: 20px" /></label>
+                <label class="col-sm-2 col-sm-2 control-label" for="C">C <input type="checkbox" name="answer3" value="@item.Answer3" style="margin-left: 20px"  id="@item.Answer3" onchange="ModifyCheckBoxes('@item.Answer3')"/></label>
                 <label class="form-control" cols="20"   rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer3</label>
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="D">D <input type="checkbox" name="answer4" value="@item.Answer4" style="margin-left: 20px" /></label>
+                <label class="col-sm-2 col-sm-2 control-label" for="D">D <input type="checkbox" name="answer4" value="@item.Answer4" style="margin-left: 20px" id="@item.Answer4" onchange="ModifyCheckBoxes('@item.Answer4')"/></label>
                 <label class="form-control" cols="20"  rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer4</label>
 
 
@@ -57,46 +44,10 @@
         </div>
         <div class="form-group">
             <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="E">E <input type="checkbox" name="answer5" value="@item.Answer5" style="margin-left: 20px" /></label>
+                <label class="col-sm-2 col-sm-2 control-label" for="E">E <input type="checkbox" name="answer5" value="@item.Answer5" style="margin-left: 20px" id="@item.Answer5" onchange="ModifyCheckBoxes('@item.Answer5')"/></label>
                 <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer5</label>
             </div>
         </div>
 
     </div>
 }
-
-<script>
-    var remSeconds = @timeRemaining;
-    var secondsCounter = remSeconds % 60;
-    function startTick() {
-        document.getElementById('secRemaining').innerText = secondsCounter;
-        document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
-
-        var _tick = setInterval(function() {
-            remSeconds = remSeconds - 1;
-            secondsCounter = secondsCounter - 1;
-
-            document.getElementById('secRemaining').innerText = secondsCounter;
-            document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
-            if (secondsCounter == 0)
-                secondsCounter = 60;
-
-        }, 1000);
-
-    }
-
-    startTick();
-
-    function saveForward(sender) {
-
-        $('#direction').val('forward');
-        document.getElementById('form').submit;
-
-    }
-    function saveBackward(sender) {
-
-        $('#direction').val('backward');
-        document.getElementById('form').submit;
-
-    }
-    </script>

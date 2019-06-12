@@ -15,6 +15,7 @@ namespace OnlineSinav.Areas.Student.Controllers
        
 
         // GET: Student/Student
+        [Authorize(Roles = "student")]
         public ActionResult Index() 
         {
 
@@ -27,25 +28,34 @@ namespace OnlineSinav.Areas.Student.Controllers
         }
 
       
-        public ActionResult ShowQuestions(int id)
+        public ActionResult ShowQuestions(int exam_id)
         {
             
             var result = Database.Session.QueryOver<Questions>().Right.JoinQueryOver<Exam>(x => x.ExamQuestions)
-                .Where(c => c.id== id).List();
+                .Where(c => c.id== exam_id).List();
 
-            return View(result);
+            var exam = Database.Session.Load<Exam>(exam_id);
+
+            return View(new ViewModels.Exam
+            {
+                questions = result,
+                examduration = Int32.Parse(exam.ExamDuration)
+                
+
+
+            });
 
         }
 
-        public ActionResult ExamEnd()
-        {
+        //public ActionResult ShowQuestions(List<Questions> )
+        //{
 
 
 
 
-            return View();
+        //    return View();
 
-        }
+        //}
 
 
         
