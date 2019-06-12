@@ -25,8 +25,6 @@ namespace OnlineSinav.Controllers
         [HttpPost]
         public ActionResult Login(AuthLogin formData, string returnUrl)
         {
-
-
             var user = Database.Session.Query<Users>().FirstOrDefault(p => p.SchoolNumber == formData.school_number);
 
             if (user == null || !(user.CheckPassword(formData.password)))
@@ -40,6 +38,7 @@ namespace OnlineSinav.Controllers
             }
 
             FormsAuthentication.SetAuthCookie(formData.school_number, true);
+
             if (!String.IsNullOrWhiteSpace(returnUrl))
             {
                 return Redirect(returnUrl); 

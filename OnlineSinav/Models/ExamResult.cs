@@ -34,9 +34,9 @@ namespace OnlineSinav.Models
         {
             Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Identity); });
 
-            ManyToOne(x => x.exam, map => { map.Column("exam_id"); map.Cascade(Cascade.Remove); });
-            ManyToOne(x => x.teacher, map => { map.Column("teacher_id"); map.Cascade(Cascade.Remove); });
-            ManyToOne(x => x.student, map => { map.Column("student_id"); map.Cascade(Cascade.Remove); });
+            ManyToOne(x => x.exam, map => { map.Column("exam_id"); map.Cascade(Cascade.None); });
+            ManyToOne(x => x.teacher, map => { map.Column("teacher_id"); map.Cascade(Cascade.None); });
+            ManyToOne(x => x.student, map => { map.Column("student_id"); map.Cascade(Cascade.None); });
 
             Property(x => x.students_answers, map => { map.Column("student_answers"); map.NotNullable(true); });
             Property(x => x.correct_answers, map => { map.Column("correct_answers"); map.NotNullable(true); });

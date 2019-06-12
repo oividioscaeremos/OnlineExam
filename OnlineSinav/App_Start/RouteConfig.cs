@@ -16,6 +16,7 @@ namespace OnlineSinav
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             //routes.MapRoute("Home", "", new { controller = "Auth", action = "Index" }, namespaces);
             routes.MapRoute("Home", "", new { controller = "Auth", action = "Login" });
+            routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" });
             routes.MapRoute("Logout", "Logout", new { controller = "Auth", action = "Logout" });
            
 

@@ -51,12 +51,8 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
 
         [Display(Name = "Sınava Girişlerin Başlayacağı Tarih")]
         [Required(ErrorMessage = "Sınavın başlayacağı tarih seçilmelidir.")]
-        public DateTime dateFrom { get; set; }
-
-        [Display(Name = "Sınava Girişlerin Sonlanacağı Tarih")]
-        [Required(ErrorMessage = "Sınava girişlerin sonlanacağı tarih seçilmelidir.")]
-        public DateTime dateTo { get; set; }
-
+        public DateTime fullDate { get; set; }
+       
         [Display(Name = "Sınav Süresi")]
         [Required(ErrorMessage = "Sınav süresi belirtilmelidir.")]
         public string examDuration { get; set; }
@@ -77,6 +73,7 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
     //    public List<Questions> questions { get; set; }
     //}
 
+
     public class TeacherIndexViewModel
     {
         public IList<Models.Exam> exams;
@@ -95,5 +92,23 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
         [Display(Name = "Okul Numarası")]
         public string school_number { get; set; }
     }
-    
+
+    public class EditExamIndex
+    {
+        public DateTime fullDate { get; set; }
+        public Exam selectedExam { get; set; }
+    }
+
+    public class EditExamQuestions
+    {
+        [Display(Name = "SORU ALANI")]
+        public string question_string { get; set; }
+        public string A { get; set; }
+        public string B { get; set; }
+        public string C { get; set; }
+        public string D { get; set; }
+        public string E { get; set; }
+        [Display(Name = "DOĞRU CEVAP")]
+        public string correct_answer { get; set; }
+    }
 }

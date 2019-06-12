@@ -12,11 +12,18 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="../../../Content/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @*<link href="../../../Content/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">*@
     <!--external css-->
     <link href="../../../Content/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../../../Content/lib/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="../../../Content/lib/bootstrap-daterangepicker/daterangepicker.css" />
+
+    <link href="../../../Content/lib/beautifulDateTimePicker/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../Content/lib/beautifulDateTimePicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" type="text/css" href="../../../Content/lib/bootstrap-datepicker/css/datepicker.css" />
+        <link rel="stylesheet" type="text/css" href="../../../Content/lib/bootstrap-daterangepicker/daterangepicker.css" />*@
+    @*<link rel="stylesheet" type="text/css" href="../../../Content/lib/css/bootstrap-datetimepicker.css" />*@
+    @*<link rel="stylesheet" type="text/css" href="../../../Content/lib/css/bootstrap-datetimepicker.min.css" />*@
+
     <!-- Custom styles for this template -->
     <link href="../../../Content/css/style.css" rel="stylesheet">
     <link href="../../../Content/css/style-responsive.css" rel="stylesheet">
@@ -57,40 +64,11 @@
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <li class="mt">
-                        <a href="@Url.Action("Index","Users", new { area = "Admin" })">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Öğretim Görevlileri</span>
-                        </a>
-                        <a href="@Url.Action("ViewStudents","Users", new { area = "Admin" })">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Öğrenciler </span>
-                        </a>
-                        <a href="@Url.Action("ViewAdmin","Users", new { area = "Admin" })">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Adminler </span>
-                        </a>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-desktop"></i>
-                            <span>Kullanıcı İşlemleri</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="@Url.Action("CreateUser","Users",new { area = "Admin" })">Yeni Kullanıcı Oluştur</a></li>
+                    
+                            <li><a href="@Url.Action("Index","Exam",new { area = "Teacher", @id = (Database.Session.Query<OnlineSinav.Models.Users>()
+                                        .FirstOrDefault(u=>u.SchoolNumber == HttpContext.Current.User.Identity.Name).id) })">Ana Sayfa</a></li>
 
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-desktop"></i>
-                            <span>Sınav İşlem</span>
-                        </a>
-                        <ul class="sub">
-                            <li><a href="@Url.Action("AssignExam","Exam",new { area = "Teacher", @id = (Database.Session.Query<OnlineSinav.Models.Users>().FirstOrDefault(u=>u.SchoolNumber == HttpContext.Current.User.Identity.Name).id) })">Yeni Kullanıcı Oluştur</a></li>
-
-                        </ul>
-                    </li>
+                        
                     <!-- sidebar menu end-->
             </div>
         </aside>
@@ -126,9 +104,9 @@
     <!--custom tagsinput-->
     <script src="../../../Content/lib/jquery.tagsinput.js"></script>
     <!--custom checkbox & radio-->
-    <script type="text/javascript" src="../../../Content/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    @*<script type="text/javascript" src="../../../Content/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="../../../Content/lib/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="../../../Content/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../../Content/lib/bootstrap-daterangepicker/daterangepicker.js"></script>*@
     <script type="text/javascript" src="../../../Content/lib/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
     <script src="../../../Content/lib/form-component.js"></script>
 

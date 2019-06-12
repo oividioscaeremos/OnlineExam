@@ -84,7 +84,8 @@ namespace OnlineSinav.Areas.Admin.Controllers
                 SchoolNumber = form.school_number,
                 Role = new Roles
                 {
-                    id = form.userRoleID
+                    id = form.userRoleID,
+                    RoleName = (Database.Session.Load<Roles>(form.userRoleID).ToString())
                 },
                 Name = form.firstname_lastname
             };

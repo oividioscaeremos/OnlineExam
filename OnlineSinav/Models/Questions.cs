@@ -23,8 +23,7 @@ namespace OnlineSinav.Models
 
         public Questions()
         {
-            ExamQuestions = new List<Exam>();
-            
+            ExamQuestions = new List<Exam>();            
         }
 
     }
@@ -47,7 +46,8 @@ namespace OnlineSinav.Models
             Property(x => x.Answer5, map => map.NotNullable(true));
 
             Property(x => x.TrueAnswer, map => { map.Column("true_answer"); map.NotNullable(true); });
-            ManyToOne(x => x.dept_id, map => { map.Column("dept_id"); map.Cascade(Cascade.Remove); });
+
+            ManyToOne(x => x.dept_id, map => { map.Column("dept_id"); map.Cascade(Cascade.None); });
 
             Bag(x => x.ExamQuestions, x => {
                 x.Table("exam_quest");

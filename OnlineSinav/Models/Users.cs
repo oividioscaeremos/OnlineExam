@@ -31,11 +31,8 @@ namespace OnlineSinav.Models
             {
                 return false;
             }
-            else { 
+            else {
             return BCrypt.Net.BCrypt.Verify(pwd, Password);
-            }
-            //var pass = BCrypt.Net.BCrypt.Verify(pwd, Password);
-            //return BCrypt.Net.BCrypt.Verify(pwd, Password);
         }
     }
 
@@ -61,8 +58,8 @@ namespace OnlineSinav.Models
 
             Bag(x => x.exams, x => {
                 x.Table("exam_student");
-                x.Key(k => k.Column("student_id"));
-            }, x => x.ManyToMany(k => k.Column("exam_id")));
+                x.Key(k => k.Column("exam_id"));
+            }, x => x.ManyToMany(k => k.Column("student_id")));
         }
     }
 }
