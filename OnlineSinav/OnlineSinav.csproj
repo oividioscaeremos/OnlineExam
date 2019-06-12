@@ -532,6 +532,7 @@
     <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\ViewModels\Exam.cs" />
+    <Compile Include="Areas\Student\ViewModels\Student.cs" />
     <Compile Include="Areas\Teacher\Controllers\ExamController.cs" />
     <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Areas\Teacher\ViewModels\NewExam.cs" />

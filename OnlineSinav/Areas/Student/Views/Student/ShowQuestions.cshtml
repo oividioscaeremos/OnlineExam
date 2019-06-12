@@ -1,23 +1,40 @@
 ﻿@using OnlineSinav.Models
 @model OnlineSinav.Areas.Student.ViewModels.Exam
 @{
-
     var endTime = DateTime.UtcNow.AddSeconds(Model.examduration * 60);
     var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
-
-
-
+    var counterIndex = 1;
 }
-
-
-
-<div>
-    Kalan zaman  <span id="minRemaining"></span>:<span id="secRemaining">  </span>
-    <img src="~/Content/img/clock-animated-gif-23.gif" width="100" height="75" style="margin-left:50px" />
-    
+<div style="font-size:30px;" class="pull-right">
+<span  id="minRemaining"></span> DK <span id="secRemaining"></span> SANİYENİZ KALDI
 </div>
-@Html.Partial("_QuestionLayout");
+    <div class="col-lg-12" id="questions">
+        <div id="abc">
+            <form class="form-horizontal style-form" id="ourForm">
+                <div class="form-panel">
 
+                    @foreach (var _question in Model.questions)
+                    {
+                        if (counterIndex == 1)
+                        {
+                            @Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Student.ViewModels.ForEachQuestion { question = _question, counter = counterIndex });
+                            counterIndex++;
+                        }
+                        else
+                        {
+                            @Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Student.ViewModels.ForEachQuestion { question = _question, counter = counterIndex });
+                            counterIndex++;
+                        }
+                    }
+                </div>
+            </form>
+            <button type="button" class="btn btn-primary" id="submitForm"
+                    style="margin-top:10px; width:100%; height:50px; font-size:16px;">
+                SINAVI KAYDET
+            </button>
+        </div>
+    </div>
+<script src="../../../Content/lib/jquery/jquery.min.js"></script>
 <script>
     var remSeconds = @timeRemaining;
     var secondsCounter = 60 - (remSeconds % 60);
@@ -59,43 +76,76 @@
     }
 </script>
 <script type="text/javascript">
-    function ModifyCheckBoxes(id) {
-        if (document.getElementById(id).checked) {
-            if (id == "#Answer1") {
-                document.getElementById("#Answer2").checked = false;
-                document.getElementById("#Answer3").checked = false;
-                document.getElementById("#Answer4").checked = false;
-                document.getElementById("#Answer5").checked = false;
 
-            } else if (id == "#Answer2") {
-                document.getElementById("#Answer1").checked = false;
-                document.getElementById("#Answer3").checked = false;
-                document.getElementById("#Answer4").checked = false;
-                document.getElementById("#Answer5").checked = false;
+    $(document).ready(function () {
 
-            }
-            else if (id == "C") {
-                document.getElementById("A").checked = false;
-                document.getElementById("B").checked = false;
-                document.getElementById("D").checked = false;
-                document.getElementById("E").checked = false;
+        
 
-            } else if (id == "D") {
-                document.getElementById("A").checked = false;
-                document.getElementById("C").checked = false;
-                document.getElementById("B").checked = false;
-                document.getElementById("E").checked = false;
 
-            } else if (id == "E") {
-                document.getElementById("A").checked = false;
-                document.getElementById("C").checked = false;
-                document.getElementById("D").checked = false;
-                document.getElementById("B").checked = false;
+        $("#submitForm").click(function () {
+            let oneData = {};
+            let allData = [];
+            let stringifiedSTR = "[";
+            let i = 0, j = 0; // i formdata'daki verileri; j ise allData'daki verileri kontrol edecek
+            let ourformData = $("#ourForm").serializeArray(); // formu seri bir array haline getiriyor
+            console.log(ourformData);
+            $.each(ourformData, function (index, element) {
+                console.log(element.value);
+            });
+            $.each(ourformData, function (a, element) {
+                if (i == 0) {
+                    oneData[element.name] = element.value;
+                    i++;
+                } else if (i == 1) {
+                    oneData[element.name] = element.value;
+                    i++;
+                } else if (i == 2) {
+                    oneData[element.name] = element.value;
+                    i++;
+                } else if (i == 3) {
+                    oneData[element.name] = element.value;
+                    i++;
+                } else if (i == 4) {
+                    oneData[element.name] = element.value;
+                    i++;
+                } else if (i == 5) {
+                    oneData[element.name] = element.value;
+                    i++;
+                } else if (i == 6) {
+                    oneData[element.name] = element.value;
+                    allData[j] = oneData;
+                    if (j == 0) {
+                        stringifiedSTR += JSON.stringify(allData[j]);
+                        j++;
+                    } else {
+                        stringifiedSTR = stringifiedSTR + "," + JSON.stringify(allData[j]);
+                        j++;
+                    }
+                    i = 0;
+                }
+            });
 
-            }
-        };
-    };
+            stringifiedSTR += "]";
 
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Teacher/Exam/CreateExam",
+            //    traditional: true,
+            //    data: { formdata: stringifiedSTR, examDetails: JSON.stringify(examsDetails) },
+            //    success: function (data) {
+
+            //        window.location.assign("/Teacher/Exam");
+            //    },
+            //    error: function (xhr) {
+            //        //debugger;
+            //        console.log(xhr.responseText);
+            //        alert("Error has occurred..");
+            //    }
+            //});
+
+        });
+
+    });
 </script>
 
 

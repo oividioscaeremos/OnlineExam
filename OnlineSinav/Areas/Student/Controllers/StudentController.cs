@@ -10,29 +10,35 @@ using Questions = OnlineSinav.Models.Questions;
 
 namespace OnlineSinav.Areas.Student.Controllers
 {
+    [Authorize(Roles = "student")]
     public class StudentController : Controller
     {
-       
-
         // GET: Student/Student
-        [Authorize(Roles = "student")]
-        public ActionResult Index() 
+        public ActionResult Index()
         {
-
-            
-            IList<Exam> result;
+            List<Exam> result = new List<Exam>();
             var loggedUser = Database.Session.Query<Users>().FirstOrDefault(c => c.SchoolNumber == HttpContext.User.Identity.Name);
+
             result = Database.Session.QueryOver<Exam>().Right.JoinQueryOver<Users>(x => x.ExamStudents)
-                .Where(c => c.id == loggedUser.id ).List();
-            return View(result);
+                .Where(c => c.id == loggedUser.id).List().ToList();
+
+            if (result[0] == null)
+            {
+                result[0] = new Exam {
+                    id = -1
+                };
+            }
+            return View(new OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
+            {
+                studentExams = result
+            });
         }
 
-      
+
         public ActionResult ShowQuestions(int exam_id)
         {
-            
             var result = Database.Session.QueryOver<Questions>().Right.JoinQueryOver<Exam>(x => x.ExamQuestions)
-                .Where(c => c.id== exam_id).List();
+                .Where(c => c.id == exam_id).List();
 
             var exam = Database.Session.Load<Exam>(exam_id);
 
@@ -40,24 +46,8 @@ namespace OnlineSinav.Areas.Student.Controllers
             {
                 questions = result,
                 examduration = Int32.Parse(exam.ExamDuration)
-                
-
-
             });
-
         }
 
-        //public ActionResult ShowQuestions(List<Questions> )
-        //{
-
-
-
-
-        //    return View();
-
-        //}
-
-
-        
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineSinav.Models.Exam>
+﻿@model OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,34 +66,49 @@
                             <hr>
                             <table class="table">
                                 <thead>
-
-                                <th>#</th>
-                                <th>Ders Adı</th>
-                                <th>Sınav Tarihi</th>
-                                <th>Sınav Başlama Saati</th>
-                                <th>Sınav Süresi</th>
-                                <th>Sınav Gir</th>
-                                <th>Sınav Notu</th>
-                                <tr></tr>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Ders Adı</td>
+                                        <td>Sınav Tarihi</td>
+                                        <td>Sınav Başlama Saati</td>
+                                        <td>Sınav Süresi</td>
+                                        <td>Sınav Gir</td>
+                                        <td>Sınav Notu</td>
+                                    </tr>
                                 </thead>
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.studentExams)
                                 {
-                                    <tbody>
+                                <tbody>
+                                    @if (item.id == -1)
+                                    {
+                                        <tr>
+                                            <td style="text-align:center;">-</td>
+                                            <td style="text-align:center;">-</td>
+                                            <td style="text-align:center;">-</td>
+                                            <td style="text-align:center;">-</td>
+                                            <td style="text-align:center;">-</td>
+                                            <td style="text-align:center;">-</td>
+                                            <td style="text-align:center;">-</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
                                         <tr>
                                             <td>@item.id</td>
                                             <td>@item.ExamName</td>
                                             <td>@item.examDate.ToShortDateString()</td>
                                             <td>@item.examStart.ToShortTimeString()</td>
                                             <td>@item.ExamDuration dk</td>
-                                            <td><button type="button" class="btn btn-round btn-theme02" name="redirect" onclick="location.href = '@Url.Action("ShowQuestions",new {exam_id = item.id})'">Sınava gir</button></td>
+                                            <td><button type="button" class="btn btn-round btn-theme02" 
+                                                        name="redirect" 
+                                                        onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
+                                                Sınava gir
+                                                </button>
+                                            </td>
                                             <td>Sınav Notu yazacak</td>
-
                                         </tr>
-
-
-
-                                    </tbody>
-
+                                    }
+                                </tbody>
                                 }
 
                             </table>
@@ -108,7 +123,7 @@
             </section>
         </section>
 
-       
+
 
         <!-- /MAIN CONTENT -->
         <!--main content end-->

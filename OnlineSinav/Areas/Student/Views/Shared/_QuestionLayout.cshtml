@@ -1,53 +1,133 @@
-﻿@*@model OnlineSinav.Areas.Student.ViewModels.Questions*@
-@using OnlineSinav.Models
-@model OnlineSinav.Areas.Student.ViewModels.Exam
+﻿@model OnlineSinav.Areas.Student.ViewModels.ForEachQuestion
 
-
-
-@foreach (var item in Model.questions)
-{
-    <div id="newForm">
-        <div class="form-group" style="margin-right: 0px;">
-            <div class="col-lg-12">
-                <hr>
-                <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width: 100%; font-size: 16px">@item.id-) @item.QuestName</label>
-                </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="A">A <input type="checkbox" name="answer1" value="@item.Answer1" style="margin-left: 20px" id="@item.Answer1" onchange="ModifyCheckBoxes('@item.Answer1')"/>
-                    </label>
-                <label class="form-control" cols="20"  rows ="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer1</label>
-            </div>
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="B">B <input type="checkbox" name="answer2" value="@item.Answer2" style="margin-left: 20px" id="@item.Answer2" onchange="ModifyCheckBoxes('@item.Answer2')"/></label>
-                <label class="form-control" cols="20"  rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer2</label>
-            </div>
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="C">C <input type="checkbox" name="answer3" value="@item.Answer3" style="margin-left: 20px"  id="@item.Answer3" onchange="ModifyCheckBoxes('@item.Answer3')"/></label>
-                <label class="form-control" cols="20"   rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer3</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="D">D <input type="checkbox" name="answer4" value="@item.Answer4" style="margin-left: 20px" id="@item.Answer4" onchange="ModifyCheckBoxes('@item.Answer4')"/></label>
-                <label class="form-control" cols="20"  rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer4</label>
-
-
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-8 col-xs-11">
-                <label class="col-sm-2 col-sm-2 control-label" for="E">E <input type="checkbox" name="answer5" value="@item.Answer5" style="margin-left: 20px" id="@item.Answer5" onchange="ModifyCheckBoxes('@item.Answer5')"/></label>
-                <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@item.Answer5</label>
-            </div>
-        </div>
+@{
+    int counter = 1;
+}
+<div class="form-group" style="margin-right: 0px;">
+    <div class="col-lg-12">
+        <hr>
+        <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width: 100%; font-size: 16px">@(Model.counter) -) @Model.question.QuestName</label>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-8 col-xs-11">
+        <label class="col-sm-2 col-sm-2 control-label" for="A">
+            A <input type="checkbox" name="@(Model.question.id)A" style="margin-left: 5%" id="@(Model.question.id)A" onchange="ModifyCheckBoxes('@(Model.question.id)A')" />
+        </label>
+        <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@Model.question.Answer1</label>
 
     </div>
-}
+</div>
+<div class="form-group">
+
+    <div class="col-md-8 col-xs-11">
+        <label class="col-sm-2 col-sm-2 control-label" for="B">
+            B <input type="checkbox" name="@(Model.question.id)B" style="margin-left: 20px" id="@(Model.question.id)B" onchange="ModifyCheckBoxes('@(Model.question.id)B')" />
+
+        </label>
+        <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@Model.question.Answer2</label>
+    </div>
+</div>
+<div class="form-group">
+
+    <div class="col-md-8 col-xs-11">
+        <label class="col-sm-2 col-sm-2 control-label" for="C">
+            C <input type="checkbox" name="@(Model.question.id)C" style="margin-left: 20px" id="@(Model.question.id)C" onchange="ModifyCheckBoxes('@(Model.question.id)C')" />
+
+        </label>
+        <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@Model.question.Answer3</label>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-8 col-xs-11">
+        <label class="col-sm-2 col-sm-2 control-label" for="D">
+            D <input type="checkbox" name="@(Model.question.id)D" style="margin-left: 20px" id="@(Model.question.id)D" onchange="ModifyCheckBoxes('@(Model.question.id)D')" />
+
+        </label>
+        <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@Model.question.Answer4</label>
+
+
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-8 col-xs-11">
+        <label class="col-sm-2 col-sm-2 control-label" for="E">
+            E <input type="checkbox" name="@(Model.question.id)E" style="margin-left: 20px" id="@(Model.question.id)E" onchange="ModifyCheckBoxes('@(Model.question.id)E')" />
+
+        </label>
+        <label class="form-control" cols="20" rows="2" style="max-width:100%; min-width:100%; font-size:16px">@Model.question.Answer5</label>
+    </div>
+</div>
+
+<script>
+    function ModifyCheckBoxes(id) {
+        let questionIDGOTTEN = id;
+        let questionID = questionIDGOTTEN.toString().slice(0,-1);
+        if (document.getElementById(id).checked == true) {
+            console.log("ID:" + id + "questionID:" + questionID);
+            if (id == (questionID + "A")) {
+                document.getElementById(questionID + "B").disabled = true;
+                document.getElementById(questionID + "C").disabled = true;
+                document.getElementById(questionID + "D").disabled = true;
+                document.getElementById(questionID + "E").disabled = true;
+
+            } else if (id == (questionID + "B")) {
+                document.getElementById(questionID + "A").disabled = true;
+                document.getElementById(questionID + "C").disabled = true;
+                document.getElementById(questionID + "D").disabled = true;
+                document.getElementById(questionID + "E").disabled = true;
+
+            } else if (id == (questionID + "C")) {
+                document.getElementById(questionID + "A").disabled = true;
+                document.getElementById(questionID + "B").disabled = true;
+                document.getElementById(questionID + "D").disabled = true;
+                document.getElementById(questionID + "E").disabled = true;
+
+            } else if (id == (questionID + "D")) {
+                document.getElementById(questionID + "A").disabled = true;
+                document.getElementById(questionID + "B").disabled = true;
+                document.getElementById(questionID + "C").disabled = true;
+                document.getElementById(questionID + "E").disabled = true;
+
+            } else if (id == (questionID + "E")) {
+                document.getElementById(questionID + "A").disabled = true;
+                document.getElementById(questionID + "B").disabled = true;
+                document.getElementById(questionID + "C").disabled = true;
+                document.getElementById(questionID + "D").disabled = true;
+
+            }
+        } else {
+            if (id == (questionID + "A")) {
+                document.getElementById(questionID + "B").disabled = false;
+                document.getElementById(questionID + "C").disabled = false;
+                document.getElementById(questionID + "D").disabled = false;
+                document.getElementById(questionID + "E").disabled = false;
+
+            } else if (id == (questionID + "B")) {
+                document.getElementById(questionID + "A").disabled = false;
+                document.getElementById(questionID + "C").disabled = false;
+                document.getElementById(questionID + "D").disabled = false;
+                document.getElementById(questionID + "E").disabled = false;
+
+            } else if (id == (questionID + "C")) {
+                document.getElementById(questionID + "A").disabled = false;
+                document.getElementById(questionID + "B").disabled = false;
+                document.getElementById(questionID + "D").disabled = false;
+                document.getElementById(questionID + "E").disabled = false;
+
+            } else if (id == (questionID + "D")) {
+                document.getElementById(questionID + "A").disabled = false;
+                document.getElementById(questionID + "B").disabled = false;
+                document.getElementById(questionID + "C").disabled = false;
+                document.getElementById(questionID + "E").disabled = false;
+
+            } else if (id == (questionID + "E")) {
+                document.getElementById(questionID + "A").disabled = false;
+                document.getElementById(questionID + "B").disabled = false;
+                document.getElementById(questionID + "C").disabled = false;
+                document.getElementById(questionID + "D").disabled = false;
+
+            }
+        }
+    };
+</script>
