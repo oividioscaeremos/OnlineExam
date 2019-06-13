@@ -30,7 +30,7 @@
                     {
                         <tr>
                             <td>@exam.ExamName</td>
-                            <td>@exam.examDate.ToShortDateString()</td>
+                            <td>@exam.examDate.ToString("dd/MM/yyyy")</td>
                             <td>@exam.examStart.ToString().Split(' ')[1]</td>
                             <td>@exam.examEnd.ToString().Split(' ')[1]</td>
                             <td>@exam.ExamDuration DK</td>

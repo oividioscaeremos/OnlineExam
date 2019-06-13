@@ -79,7 +79,10 @@
         todayHighlight: 1,
         startView: 2,
         forceParse: 0,
-        showMeridian: 1
+        showMeridian: 1,
+        format: 'dd/mm/yyyy - HH:ii',
+        startDate: new Date,
+        autoclose: true,
     });
     $('.form_date').datetimepicker({
         language: 'tr',
@@ -89,6 +92,7 @@
         todayHighlight: 1,
         startView: 2,
         minView: 2,
+        format: 'dd/mm/yyyy - HH:ii',
         forceParse: 0
     });
     $('.form_time').datetimepicker({
@@ -100,6 +104,7 @@
         startView: 1,
         minView: 0,
         maxView: 1,
+        format: 'dd/mm/yyyy - HH:ii',
         forceParse: 0
     });
     $(document).ready(function () {

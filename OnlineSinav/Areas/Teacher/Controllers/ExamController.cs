@@ -48,18 +48,43 @@ namespace OnlineSinav.Areas.Teacher.Controllers
 
             exam = Database.Session.Load<Exam>(examID);
 
-            CultureInfo ci = new CultureInfo("tr-TR");
 
-            var dateSplitted = exam.examStart.ToString("dd/MM/yyyy HH:mm");
+            var dateSplitted = exam.examStart.ToString("dd/MM/yyyy HH:mm:ss");
             //var hour = Convert.ToInt32(dateSplitted[1][0] + dateSplitted[1][1]);
-            string dateString = exam.examDate.ToString("dd/MM/yyyy") + " " + exam.examStart.Hour+":"+exam.examStart.Minute;
+            string day,month,hour,minute;
 
+            day = exam.examStart.Day.ToString();
+            month = exam.examStart.Month.ToString();
+            hour = exam.examStart.Hour.ToString();
+            minute = exam.examStart.Minute.ToString();
 
+            if(day.Length == 1)
+            {
+                day = "0" + day;
+            }
+            if (month.Length == 1)
+            {
+                month = "0" + month;
+            }
+            if (hour.Length == 1)
+            {
+                hour = "0" + hour;
+            }
+            if (minute.Length == 1)
+            {
+                minute = "0" + minute;
+            }
+
+            string dateString = exam.examDate.ToString("dd/MM/yyyy") + " " + hour+":"+minute+":00";
+
+            //{6/13/2019 5:30:00 PM}
+
+            var abcde = DateTime.ParseExact(exam.examStart.ToString("dd/MM/yyyy HH:mm"), "dd/MM/yyyy HH:mm", null);
 
             return View(new EditExamIndex
             {
                 selectedExam = exam,
-                fullDate = Convert.ToDateTime(exam.examStart.ToString("dd/MM/yyyy HH:mm"))
+                fullDate = DateTime.ParseExact(exam.examStart.ToString("dd/MM/yyyy HH:mm"),"dd/MM/yyyy HH:mm", null)
             });
         }
 
@@ -130,15 +155,11 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             };
 
             var deneme = DateTime.ParseExact(examFullDate.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null).ToShortDateString();
-            var denemee = Convert.ToDateTime(deneme);
-            var a = examFullDate.TimeOfDay.Hours.ToString();
-            var b = examFullDate.TimeOfDay.Minutes.ToString();
-            var deneme2 = DateTime.ParseExact((examFullDate.TimeOfDay.Hours.ToString() + ":" + examFullDate.TimeOfDay.Minutes.ToString()), "HH:mm", null);
-
+            
             examToEdit.ExamName = examDetailsArray[0].Value;
             examToEdit.ExamDuration = examDetailsArray[1].Value;
             examToEdit.examDate = Convert.ToDateTime(deneme);
-            examToEdit.examStart = DateTime.ParseExact((a+":"+b), "HH:mm",null);
+            examToEdit.examStart = examFullDate;
 
             examToEdit.examEnd = examFullDate.AddMinutes(Convert.ToInt32(examDuration));
             
