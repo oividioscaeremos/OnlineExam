@@ -46,9 +46,34 @@ namespace OnlineSinav.Areas.Student.Controllers
                 });
             }
 
+            List<Exam> examAvailableNow = new List<Exam>();
+            
+            int counter = 0;
+            foreach(var exam in result)
+            {
+                var _exam = Database.Session.Load<Exam>(exam.id);
+
+                var exDate = _exam.examStart.Date;
+                var nowDate = DateTime.Now.Date;
+
+                var exTimeOfDay = _exam.examStart.TimeOfDay;
+                var nowTimeOfDay = DateTime.Now.TimeOfDay;
+                if (_exam.examStart.Date == DateTime.Now.Date && (_exam.examStart.AddMinutes(15) >= DateTime.Now) && (_exam.examStart <= DateTime.Now))
+                {
+                    examAvailableNow.Add(exam);
+                }
+            }
+
+            if(examAvailableNow.Count == 0)
+            {
+                examAvailableNow.Add(new Exam {
+                    id = -1,
+                });
+            }
+
             return View(new OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
             {
-                studentExams = result,
+                studentExams = examAvailableNow,
                 examResult = examResults
             });
         }
