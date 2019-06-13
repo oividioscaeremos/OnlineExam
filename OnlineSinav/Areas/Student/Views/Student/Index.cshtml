@@ -1,7 +1,7 @@
 ﻿@model OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
-    @{ 
-        int counter = 0;
-    }
+@{
+    int counter = 0;
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,23 +41,23 @@
         <!--header start-->
         @*<header class="header black-bg">
 
-            <!--logo start-->
-            <a href="index.html" class="logo" style="margin-left: 100px"><b>Öğrenci SIn<span>av tablosu</span></b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
+                <!--logo start-->
+                <a href="index.html" class="logo" style="margin-left: 100px"><b>Öğrenci SIn<span>av tablosu</span></b></a>
+                <!--logo end-->
+                <div class="nav notify-row" id="top_menu">
 
-                <ul class="nav top-menu"></ul>
+                    <ul class="nav top-menu"></ul>
 
-            </div>
-            <div class="top-menu">
-                <ul class="nav pull-right top-menu">
-                    <li>
+                </div>
+                <div class="top-menu">
+                    <ul class="nav pull-right top-menu">
+                        <li>
 
-                        <a class="logout" href="login.html">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </header>*@
+                            <a class="logout" href="login.html">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>*@
 
         <a href="index.html" class="logo" style="margin-left: 100px;margin-top: auto"><b>****<span>Öğrenci SInav tablosu</span>****</b></a>
 
@@ -83,59 +83,63 @@
                                 </thead>
                                 @foreach (var item in Model.studentExams)
                                 {
-                                <tbody>
-                                    @if (item.id == -1)
-                                    {
-                                        <tr>
-                                            <td style="text-align:center;">-</td>
-                                            <td style="text-align:center;">-</td>
-                                            <td style="text-align:center;">-</td>
-                                            <td style="text-align:center;">-</td>
-                                            <td style="text-align:center;">-</td>
-                                            <td style="text-align:center;">-</td>
+                                    <tbody>
+                                        @if (item.id == -1)
+                                        {
+                                            <tr>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
                                             </tr>
-                                    }
-                                    else
-                                    {
-                                        <tr>
-                                            <td>@item.ExamName</td>
-                                            <td>@item.examDate.ToShortDateString()</td>
-                                            <td>@item.examStart.ToShortTimeString()</td>
-                                            <td>@item.ExamDuration dk</td>
-                                            @if (Model.examResult[counter].exam.id == item.id)
-                                            {
-                                            <td>
-                                                <button type="button" class="btn btn-round btn-theme02"
-                                                        name="redirect"
-                                                        disabled="disabled"
-                                                        onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
-                                                    Sınava gir
-                                                </button>
-                                            </td>
-                                            }
-                                            else
-                                            {
-                                            <td>
-                                                <button type="button" class="btn btn-round btn-theme02"
-                                                        name="redirect"
-                                                        onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
-                                                    Sınava gir
-                                                </button>
-                                            </td>
-                                            }
-                                            
-                                            @if (Model.examResult[counter].exam.id == item.id)
-                                            {
-                                                <td>@Model.examResult[counter++].result</td>
-                                            }
-                                            else
-                                            {
-                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@item.ExamName</td>
+                                                <td>@item.examDate.ToShortDateString()</td>
+                                                <td>@item.examStart.ToShortTimeString()</td>
+                                                <td>@item.ExamDuration dk</td>
+                                                @if (Model.examResult.Count >= 1)
+                                                {
+                                                    if (Model.examResult[counter].exam.id == item.id)
+                                                    {
+                                                        <td>
+                                                            <button type="button" class="btn btn-round btn-theme02"
+                                                                    name="redirect"
+                                                                    disabled="disabled"
+                                                                    onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
+                                                                Sınava gir
+                                                            </button>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <button type="button" class="btn btn-round btn-theme02"
+                                                                    name="redirect"
+                                                                    onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
+                                                                Sınava gir
+                                                            </button>
+                                                        </td>
+                                                    }
+                                                }
+
+                                                @if (Model.examResult[counter].exam.id == item.id)
+                                                {
+                                                    <td>@Model.examResult[counter++].result</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>-</td>
+                                                }
 
 
-                                        </tr>
-                                    }
-                                </tbody>
+                                            </tr>
+                                        }
+                                    </tbody>
                                 }
 
                             </table>

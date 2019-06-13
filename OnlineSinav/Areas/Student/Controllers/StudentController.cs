@@ -35,6 +35,16 @@ namespace OnlineSinav.Areas.Student.Controllers
             List<ExamResult> examResults = new List<ExamResult>();
             examResults = Database.Session.Query<ExamResult>().Where(e => e.student.id == loggedUser.id).ToList();
 
+            if(examResults.Count == 0)
+            {
+                examResults.Add(new ExamResult
+                {
+                    id = -1,
+                    exam = new Exam {
+                        id = -1,
+                    },
+                });
+            }
 
             return View(new OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
             {
