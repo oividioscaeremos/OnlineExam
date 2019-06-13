@@ -34,33 +34,34 @@ namespace OnlineSinav.Areas.Student.Controllers
 
             List<ExamResult> examResults = new List<ExamResult>();
             examResults = Database.Session.Query<ExamResult>().Where(e => e.student.id == loggedUser.id).ToList();
-
-            if(examResults.Count == 0)
+            if (examResults.Count == 0)
             {
                 examResults.Add(new ExamResult
                 {
                     id = -1,
-                    exam = new Exam {
+                    exam = new Exam
+                    {
                         id = -1,
                     },
                 });
             }
-
             List<Exam> examAvailableNow = new List<Exam>();
-            
-            int counter = 0;
-            foreach(var exam in result)
+
+            if (result[0].id != -1)
             {
-                var _exam = Database.Session.Load<Exam>(exam.id);
-
-                var exDate = _exam.examStart.Date;
-                var nowDate = DateTime.Now.Date;
-
-                var exTimeOfDay = _exam.examStart.TimeOfDay;
-                var nowTimeOfDay = DateTime.Now.TimeOfDay;
-                if (_exam.examStart.Date == DateTime.Now.Date && (_exam.examStart.AddMinutes(15) >= DateTime.Now) && (_exam.examStart <= DateTime.Now))
+                foreach (var exam in result)
                 {
-                    examAvailableNow.Add(exam);
+                    var _exam = Database.Session.Load<Exam>(exam.id);
+
+                    var exDate = _exam.examStart.Date;
+                    var nowDate = DateTime.Now.Date;
+
+                    var exTimeOfDay = _exam.examStart.TimeOfDay;
+                    var nowTimeOfDay = DateTime.Now.TimeOfDay;
+                    if (_exam.examStart.Date == DateTime.Now.Date && (_exam.examStart.AddMinutes(15) >= DateTime.Now) && (_exam.examStart <= DateTime.Now))
+                    {
+                        examAvailableNow.Add(exam);
+                    }
                 }
             }
 

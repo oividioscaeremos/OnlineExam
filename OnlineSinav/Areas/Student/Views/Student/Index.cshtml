@@ -116,24 +116,30 @@
                                                         </td>
                                                         <td>@examresult.result</td>
                                                     </tr>
+                                                    counter++;
+                                                    break;
                                                 }
-                                                else
-                                                {
-                                                    <tr>
-                                                        <td>@item.ExamName</td>
-                                                        <td>@item.examDate.ToShortDateString()</td>
-                                                        <td>@item.examStart.ToShortTimeString()</td>
-                                                        <td>@item.ExamDuration dk</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-round btn-theme02"
-                                                                    name="redirect"
-                                                                    onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
-                                                                Sınava gir
-                                                            </button>
-                                                        </td>
-                                                        <td>-</td>
-                                                    </tr>
-                                                }
+                                            }
+                                            if (counter == 0)
+                                            {
+                                                <tr>
+                                                    <td>@item.ExamName</td>
+                                                    <td>@item.examDate.ToShortDateString()</td>
+                                                    <td>@item.examStart.ToShortTimeString()</td>
+                                                    <td>@item.ExamDuration dk</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-round btn-theme02"
+                                                                name="redirect"
+                                                                onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
+                                                            Sınava gir
+                                                        </button>
+                                                    </td>
+                                                    <td>-</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                counter = 0;
                                             }
                                         }
                                     </tbody>
