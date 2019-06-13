@@ -85,7 +85,6 @@
 
                                     @foreach (var item in Model.studentExams)
                                     {
-
                                         if (item.id == -1)
                                         {
                                             <tr>
@@ -146,26 +145,40 @@
                                         }
                                     }
 
-                                    
-                                        @foreach (var resultedExam in Model.examResult)
+
+                                    @foreach (var resultedExam in Model.examResult)
+                                    {
+                                        if (resultedExam.id == -1)
                                         {
-                                        <tr>
-                                            <td>@resultedExam.exam.id</td>
-                                            <td>@resultedExam.exam.examDate.ToShortDateString()</td>
-                                            <td>@resultedExam.exam.examStart.ToShortTimeString()</td>
-                                            <td>@resultedExam.exam.ExamDuration dk</td>
-                                            <td>
-                                                <button type="button" class="btn btn-round btn-theme02"
-                                                        name="redirect"
-                                                        disabled="disabled"
-                                                        onclick="location.href = '#'">
-                                                    Sınava gir
-                                                </button>
-                                            </td>
-                                            <td>@resultedExam.result</td>
-                                        </tr>
+                                            <tr>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                            </tr>
                                         }
-                                    
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@resultedExam.exam.id</td>
+                                                <td>@resultedExam.exam.examDate.ToShortDateString()</td>
+                                                <td>@resultedExam.exam.examStart.ToShortTimeString()</td>
+                                                <td>@resultedExam.exam.ExamDuration dk</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-round btn-theme02"
+                                                            name="redirect"
+                                                            disabled="disabled"
+                                                            onclick="location.href = '#'">
+                                                        Sınava gir
+                                                    </button>
+                                                </td>
+                                                <td>@resultedExam.result</td>
+                                            </tr>
+                                        }
+                                    }
+
                                 </tbody>
 
                             </table>
