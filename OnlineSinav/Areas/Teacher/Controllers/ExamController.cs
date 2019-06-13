@@ -3,6 +3,7 @@ using OnlineSinav.Areas.Teacher.ViewModels;
 using OnlineSinav.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -47,9 +48,18 @@ namespace OnlineSinav.Areas.Teacher.Controllers
 
             exam = Database.Session.Load<Exam>(examID);
 
+            CultureInfo ci = new CultureInfo("tr-TR");
+
+            var dateSplitted = exam.examStart.ToString("dd/MM/yyyy HH:mm");
+            //var hour = Convert.ToInt32(dateSplitted[1][0] + dateSplitted[1][1]);
+            string dateString = exam.examDate.ToString("dd/MM/yyyy") + " " + exam.examStart.Hour+":"+exam.examStart.Minute;
+
+
+
             return View(new EditExamIndex
             {
-                selectedExam = exam
+                selectedExam = exam,
+                fullDate = Convert.ToDateTime(exam.examStart.ToString("dd/MM/yyyy HH:mm"))
             });
         }
 
@@ -59,31 +69,39 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             Users currentTeacher = new Users();
             Exam examToEdit = new Exam();
             Exam examBeforeEdit = new Exam();
+            examToEdit = Database.Session.Load<Exam>(examID); // düzenleyeceğimiz sınavı çekiyoruz.
+
             IList<Models.Questions> currentExamsQuestions;
 
             var questionsArray = JsonConvert.DeserializeObject<List<FormData>>(formdata); // JSON.Stringify'dan model kullanarak normal array'e çeviriyoruz.
             var examDetailsArray = JsonConvert.DeserializeObject<List<GetFormData>>(examDetails); // JSON.Stringify'dan model kullanarak normal array'e çeviriyoruz.         
 
-            string[] dateTime;
-            dateTime = examDetailsArray[2].Value.ToString().Split('-');
+            var examDuration = examDetailsArray[1].Value; // sınav süresi verisi
 
-            var examDuration = examDetailsArray[1].Value;
+            string[] examDateStr = examDetailsArray[2].Value.ToString().Split('-'); // sınav tarih verisini bölüyoruz çünkü sayfada tarih verisi değiştirilmemişse
+                                                                                    // hata veriyor, arada - olmadığı için. Burda bölünüp bölünmediğine bakıyoruz kısaca.
 
-            var hour = Convert.ToInt32(examDuration) / 60;
-            var minutes = Convert.ToInt32(examDuration) % 60;
+            DateTime examFullDate;
+            string dateString;
 
-            string[] examStart = dateTime[1].TrimStart(' ').Split(':');
+            if (examDateStr.Count<string>() == 1)
+            {
+                examFullDate = Convert.ToDateTime(examDateStr[0]);
+                dateString = examFullDate.ToString("dd/MM/yyyy HH:mm");
+                examFullDate = DateTime.ParseExact(dateString,"dd/MM/yyyy HH:mm", null);
 
-            var examDate = DateTime.ParseExact(dateTime[0].TrimEnd(' '), "dd/MM/yyyy", null);
-            var examStartt = DateTime.ParseExact(dateTime[1].TrimEnd(' ').TrimStart(' '), "HH:mm", null);
-            var examStartHour = DateTime.ParseExact((dateTime[0].TrimEnd(' ') + " " + dateTime[1].TrimEnd(' ').TrimStart(' ')), "dd/MM/yyyy HH:mm", null);
-            string examEnd = (Convert.ToInt32(examStart[0]) + hour).ToString() + ":" + (Convert.ToInt32(examStart[1]) + minutes).ToString();
+            }
+            else
+            {
+                var degisken = examDateStr[0].TrimEnd(' ') + " " + examDateStr[1].TrimStart(' ');
 
-            
+                examFullDate = DateTime.ParseExact(degisken,"dd/MM/yyyy HH:mm",null);
+                dateString = examFullDate.ToString("dd/MM/yyyy HH:mm");
 
-            examToEdit = Database.Session.Load<Exam>(examID);
 
-            currentExamsQuestions = examToEdit.ExamQuestions;
+            }
+
+            currentExamsQuestions = examToEdit.ExamQuestions; // 
 
             int currentQuestionCount = currentExamsQuestions.Count;
             for (int i = 0; i < currentQuestionCount; i++)
@@ -111,12 +129,21 @@ namespace OnlineSinav.Areas.Teacher.Controllers
                 Database.Session.Save(toAdd);
             };
 
+            var deneme = DateTime.ParseExact(examFullDate.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null).ToShortDateString();
+            var denemee = Convert.ToDateTime(deneme);
+            var a = examFullDate.TimeOfDay.Hours.ToString();
+            var b = examFullDate.TimeOfDay.Minutes.ToString();
+            var deneme2 = DateTime.ParseExact((examFullDate.TimeOfDay.Hours.ToString() + ":" + examFullDate.TimeOfDay.Minutes.ToString()), "HH:mm", null);
 
             examToEdit.ExamName = examDetailsArray[0].Value;
             examToEdit.ExamDuration = examDetailsArray[1].Value;
-            examToEdit.examDate = DateTime.ParseExact(dateTime[0].TrimEnd(' '), "dd/MM/yyyy", null);
-            examToEdit.examStart = examStartHour;
-            examToEdit.examEnd = DateTime.ParseExact((dateTime[0].TrimEnd(' ') + " " + examEnd), "dd/MM/yyyy HH:mm", null);
+            examToEdit.examDate = Convert.ToDateTime(deneme);
+            examToEdit.examStart = DateTime.ParseExact((a+":"+b), "HH:mm",null);
+
+            examToEdit.examEnd = examFullDate.AddMinutes(Convert.ToInt32(examDuration));
+            
+
+
 
             var examsDetails = examToEdit;
             var allQuestions = examToEdit.ExamQuestions;
@@ -135,7 +162,7 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             dept.id = examToDelete.Department.id;
             int totalQuestions = examToDelete.ExamQuestions.Count;
 
-            for(int i = 0; i < totalQuestions; i++)
+            for (int i = 0; i < totalQuestions; i++)
             {
                 var question = examToDelete.ExamQuestions[0];
                 examToDelete.ExamQuestions.Remove(question);
@@ -224,7 +251,6 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             var _Choosen = Database.Session.QueryOver<Users>() // sınava öğrenci ata dediğimde seçilmiş ve seçilmemiş olarak iki farklı şekilde liste oluşturuyor,
                            .Right.JoinQueryOver<Exam>(x => x.exams) // bu seçilmiş öğrencilerin listesi
                            .Where(c => c.id == examID)
-                           .Where(c => c.Department == dept)
                            .List();
 
 
@@ -267,8 +293,10 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             var exam = Database.Session.Load<Exam>(examId);
 
             exam.ExamStudents.Add(student);
+            student.exams.Add(exam);
 
             Database.Session.Update(exam);
+            Database.Session.Update(student);
             Database.Session.Flush();
         }
 
@@ -284,6 +312,7 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             Database.Session.Update(exam);
             Database.Session.Flush();
         }
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

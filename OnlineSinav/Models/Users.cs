@@ -67,8 +67,8 @@ namespace OnlineSinav.Models
                 Bag(x => x.exams, x =>
                 {
                     x.Table("exam_student");
-                    x.Key(k => k.Column("exam_id"));
-                }, x => x.ManyToMany(k => k.Column("student_id")));
+                    x.Key(k => k.Column("student_id"));
+                }, x => x.ManyToMany(k => k.Column("exam_id")));
             }
         }
     }
