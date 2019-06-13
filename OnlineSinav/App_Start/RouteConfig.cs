@@ -18,7 +18,8 @@ namespace OnlineSinav
             routes.MapRoute("Home", "", new { controller = "Auth", action = "Login" });
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" });
             routes.MapRoute("Logout", "Logout", new { controller = "Auth", action = "Logout" });
-           
+            
+
 
         }
     }
