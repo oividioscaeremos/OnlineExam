@@ -11,6 +11,8 @@ namespace OnlineSinav.Areas.Student.ViewModels
     {
         public int examduration { get; set; }
         public IList<Questions> questions { get; set; }
+        public int studentExamID { get; set; }
+        public int studentID { get; set; }
     }
 
     public class ForEachQuestion
@@ -27,4 +29,5 @@ namespace OnlineSinav.Areas.Student.ViewModels
         public int counter { get; set; }
         public Questions question { get; set; }
     }
+
 }

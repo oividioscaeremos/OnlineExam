@@ -30,6 +30,7 @@ namespace OnlineSinav
             mapper.AddMapping<LessonsMap>();
             mapper.AddMapping<ExamMap>();
             mapper.AddMapping<DepartmentMap>();
+            mapper.AddMapping<Models.ExamResultMap>();
 
             config.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 

@@ -5,37 +5,37 @@
     var endTime = DateTime.UtcNow.AddSeconds(Model.examduration * 60);
     var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
     var counterIndex = 1;
-  
+
 }
 <div style="font-size:30px;" class="pull-right">
-<span  id="minRemaining"></span> DK <span id="secRemaining"></span> SANİYENİZ KALDI
+    <span id="minRemaining"></span> DK <span id="secRemaining"></span> SANİYENİZ KALDI
 </div>
-    <div class="col-lg-12" id="questions">
-        <div id="abc">
-            <form class="form-horizontal style-form" id="ourForm">
-                <div class="form-panel">
+<div class="col-lg-12" id="questions">
+    <div id="abc">
+        <form class="form-horizontal style-form" id="ourForm">
+            <div class="form-panel">
 
-                    @foreach (var _question in Model.questions)
+                @foreach (var _question in Model.questions)
+                {
+                    if (counterIndex == 1)
                     {
-                        if (counterIndex == 1)
-                        {
-                            @Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Student.ViewModels.ForEachQuestion { question = _question, counter = counterIndex });
-                            counterIndex++;
-                        }
-                        else
-                        {
-                            @Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Student.ViewModels.ForEachQuestion { question = _question, counter = counterIndex });
-                            counterIndex++;
-                        }
+                        @Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Student.ViewModels.ForEachQuestion { question = _question, counter = counterIndex });
+                        counterIndex++;
                     }
-                </div>
-            </form>
-            <button type="button" class="btn btn-primary" id="submitForm"
-                    style="margin-top:10px; width:100%; height:50px; font-size:16px;">
-                SINAVI KAYDET
-            </button>
-        </div>
+                    else
+                    {
+                        @Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Student.ViewModels.ForEachQuestion { question = _question, counter = counterIndex });
+                        counterIndex++;
+                    }
+                }
+            </div>
+        </form>
+        <button type="button" class="btn btn-primary" id="submitForm"
+                style="margin-top:10px; width:100%; height:50px; font-size:16px;">
+            SINAVI KAYDET
+        </button>
     </div>
+</div>
 <script src="../../../Content/lib/jquery/jquery.min.js"></script>
 <script>
     var remSeconds = @timeRemaining;
@@ -44,12 +44,7 @@
         document.getElementById('secRemaining').innerText = secondsCounter;
         document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
 
-        
-
         var _tick = setInterval(function() {
-
-
-
             document.getElementById('secRemaining').innerText = secondsCounter;
             document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
             if (secondsCounter == 0) {
@@ -58,34 +53,18 @@
             remSeconds = remSeconds - 1;
             secondsCounter = secondsCounter - 1;
 
-            
             if (parseInt(remSeconds / 60) == 0) {
                 if (secondsCounter == 0) {
-                    
+
                     alert("Sinavin süren bitti sınavın kaydedildi, giriş sayfasina yönlendiriliyorsunuz");
-                    
+
                     window.location.href = "Index"
-                    
+
                 }
             }
 
         }, 1000);
-        
-        
-
-
-
-
         }
-
-
-             
-
-        
-        
-        
-
-    
 
     startTick();
 
@@ -105,10 +84,6 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-
-        
-
-
         $("#submitForm").click(function () {
             let oneData = {};
             let allData = [];
@@ -116,59 +91,61 @@
             let i = 0, j = 0; // i formdata'daki verileri; j ise allData'daki verileri kontrol edecek
             let ourformData = $("#ourForm").serializeArray(); // formu seri bir array haline getiriyor
             console.log(ourformData);
-            $.each(ourformData, function (index, element) {
-                console.log(element.value);
-            });
-            $.each(ourformData, function (a, element) {
-                if (i == 0) {
-                    oneData[element.name] = element.value;
-                    i++;
-                } else if (i == 1) {
-                    oneData[element.name] = element.value;
-                    i++;
-                } else if (i == 2) {
-                    oneData[element.name] = element.value;
-                    i++;
-                } else if (i == 3) {
-                    oneData[element.name] = element.value;
-                    i++;
-                } else if (i == 4) {
-                    oneData[element.name] = element.value;
-                    i++;
-                } else if (i == 5) {
-                    oneData[element.name] = element.value;
-                    i++;
-                } else if (i == 6) {
-                    oneData[element.name] = element.value;
-                    allData[j] = oneData;
-                    if (j == 0) {
-                        stringifiedSTR += JSON.stringify(allData[j]);
-                        j++;
-                    } else {
-                        stringifiedSTR = stringifiedSTR + "," + JSON.stringify(allData[j]);
-                        j++;
-                    }
-                    i = 0;
-                }
-            });
-
-            stringifiedSTR += "]";
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Teacher/Exam/CreateExam",
-            //    traditional: true,
-            //    data: { formdata: stringifiedSTR, examDetails: JSON.stringify(examsDetails) },
-            //    success: function (data) {
-
-            //        window.location.assign("/Teacher/Exam");
-            //    },
-            //    error: function (xhr) {
-            //        //debugger;
-            //        console.log(xhr.responseText);
-            //        alert("Error has occurred..");
+            //$.each(ourformData, function (index, element) {
+            //    console.log(element.value);
+            //});
+            //$.each(ourformData, function (a, element) {
+            //    if (i == 0) {
+            //        oneData[element.name] = element.value;
+            //        i++;
+            //    } else if (i == 1) {
+            //        oneData[element.name] = element.value;
+            //        i++;
+            //    } else if (i == 2) {
+            //        oneData[element.name] = element.value;
+            //        i++;
+            //    } else if (i == 3) {
+            //        oneData[element.name] = element.value;
+            //        i++;
+            //    } else if (i == 4) {
+            //        oneData[element.name] = element.value;
+            //        i++;
+            //    } else if (i == 5) {
+            //        oneData[element.name] = element.value;
+            //        i++;
+            //    } else if (i == 6) {
+            //        oneData[element.name] = element.value;
+            //        allData[j] = oneData;
+            //        if (j == 0) {
+            //            stringifiedSTR += JSON.stringify(allData[j]);
+            //            j++;
+            //        } else {
+            //            stringifiedSTR = stringifiedSTR + "," + JSON.stringify(allData[j]);
+            //            j++;
+            //        }
+            //        i = 0;
             //    }
             //});
+
+            stringifiedSTR += "]";
+            var examsID = @Model.studentExamID;
+            let thisStudentsID = @Model.studentID;
+            console.log(thisStudentsID);
+            $.ajax({
+                type: "POST",
+                url: "/Student/Student/SendExamResult",
+                traditional: true,
+                data: { examid: examsID, studentid: thisStudentsID, answers: JSON.stringify(ourformData) },
+                success: function (data) {
+
+                    //window.location.assign("/Student/Student");
+                },
+                error: function (xhr) {
+                    //debugger;
+                    console.log(xhr.responseText);
+                    alert("Error has occurred..");
+                }
+            });
 
         });
 

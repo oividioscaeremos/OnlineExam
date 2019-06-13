@@ -1,4 +1,7 @@
 ﻿@model OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
+    @{ 
+        int counter = 0;
+    }
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,6 +58,7 @@
                 </ul>
             </div>
         </header>*@
+
         <a href="index.html" class="logo" style="margin-left: 100px;margin-top: auto"><b>****<span>Öğrenci SInav tablosu</span>****</b></a>
 
 
@@ -64,12 +68,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> Tablo</h4>
+                            <h4><i class="fa fa-angle-right"></i> Sınavlar Tablosu</h4>
                             <hr>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <td>#</td>
                                         <td>Ders Adı</td>
                                         <td>Sınav Tarihi</td>
                                         <td>Sınav Başlama Saati</td>
@@ -90,24 +93,46 @@
                                             <td style="text-align:center;">-</td>
                                             <td style="text-align:center;">-</td>
                                             <td style="text-align:center;">-</td>
-                                            <td style="text-align:center;">-</td>
                                             </tr>
                                     }
                                     else
                                     {
                                         <tr>
-                                            <td>@item.id</td>
                                             <td>@item.ExamName</td>
                                             <td>@item.examDate.ToShortDateString()</td>
                                             <td>@item.examStart.ToShortTimeString()</td>
                                             <td>@item.ExamDuration dk</td>
-                                            <td><button type="button" class="btn btn-round btn-theme02" 
-                                                        name="redirect" 
+                                            @if (Model.examResult[counter].exam.id == item.id)
+                                            {
+                                            <td>
+                                                <button type="button" class="btn btn-round btn-theme02"
+                                                        name="redirect"
+                                                        disabled="disabled"
                                                         onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
-                                                Sınava gir
+                                                    Sınava gir
                                                 </button>
                                             </td>
-                                            <td>Sınav Notu yazacak</td>
+                                            }
+                                            else
+                                            {
+                                            <td>
+                                                <button type="button" class="btn btn-round btn-theme02"
+                                                        name="redirect"
+                                                        onclick="location.href = '@Url.Action("ShowQuestions", new { exam_id = item.id })'">
+                                                    Sınava gir
+                                                </button>
+                                            </td>
+                                            }
+                                            
+                                            @if (Model.examResult[counter].exam.id == item.id)
+                                            {
+                                                <td>@Model.examResult[counter++].result</td>
+                                            }
+                                            else
+                                            {
+                                            }
+
+
                                         </tr>
                                     }
                                 </tbody>

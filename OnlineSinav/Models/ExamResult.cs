@@ -32,13 +32,16 @@ namespace OnlineSinav.Models
     {
         public ExamResultMap()
         {
+            Schema("onlineexam");
+            Table("exam_results");
+            Lazy(true);
             Id(x => x.id, map => { map.Column("id"); map.Generator(Generators.Identity); });
 
             ManyToOne(x => x.exam, map => { map.Column("exam_id"); map.Cascade(Cascade.None); });
             ManyToOne(x => x.teacher, map => { map.Column("teacher_id"); map.Cascade(Cascade.None); });
             ManyToOne(x => x.student, map => { map.Column("student_id"); map.Cascade(Cascade.None); });
 
-            Property(x => x.students_answers, map => { map.Column("student_answers"); map.NotNullable(true); });
+            Property(x => x.students_answers, map => { map.Column("students_answers"); map.NotNullable(true); });
             Property(x => x.correct_answers, map => { map.Column("correct_answers"); map.NotNullable(true); });
             Property(x => x.result, map => map.NotNullable(true));
 
