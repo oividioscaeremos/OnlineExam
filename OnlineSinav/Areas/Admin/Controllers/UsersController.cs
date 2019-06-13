@@ -2,12 +2,15 @@
 using NHibernate.Linq;
 using OnlineSinav.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.UI.WebControls;
+using Roles = OnlineSinav.Models.Roles;
 
 namespace OnlineSinav.Areas.Admin.Controllers
 {
@@ -170,21 +173,31 @@ namespace OnlineSinav.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult EditUser(int id, CreateUser formdata)
         {
+            IEnumerable<Department> AllDepartment = Database.Session.Query<Department>();
+            IEnumerable<Roles> AllRoles = Database.Session.Query<Roles>().ToList();
             var role = Database.Session.Load<Roles>(System.Convert.ToInt32(formdata.SelectedRoleID));
             var newUser = Database.Session.Load<Users>(id);
-            if (Database.Session.Query<Users>().Any(u => u.SchoolNumber == formdata.school_number))
+            if (Database.Session.Query<Users>().Any(u => u.Password == ""))
             {
                 ModelState.AddModelError("school_number", "Belirtilen numaraya ait bir kullanıcı zaten var.");
             }
 
             if (!ModelState.IsValid)
-                return View(formdata);
+                return View(new CreateUser
+                {
+                    firstname_lastname = formdata.firstname_lastname,
+                    school_number = formdata.school_number,
+                    allRoles = new SelectList(AllRoles),
+                    SelectedRoleID = System.Convert.ToString(formdata.SelectedRoleID),
+                    allDepts = new SelectList(AllDepartment),
+
+                });
 
             newUser.SchoolNumber = formdata.school_number;
             setUserDept(formdata.userDeptID, newUser.depts);
+            newUser.Role = role;
             newUser.Name = formdata.firstname_lastname;
             newUser.SetPassword(formdata.password);
-            newUser.Role = role;
 
             Database.Session.Update(newUser);
             Database.Session.Flush();
@@ -231,6 +244,11 @@ namespace OnlineSinav.Areas.Admin.Controllers
             }
             else
                 return RedirectToAction("ViewStudents");
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToRoute("Home");
         }
     }
 }

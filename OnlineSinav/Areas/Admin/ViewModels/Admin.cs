@@ -1,5 +1,6 @@
 ﻿using OnlineSinav.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -64,10 +65,9 @@ namespace OnlineSinav.ViewModels
 
     public class CreateUser
     {
+     
         public SelectList allRoles { get; set; }
         public SelectList allDepts { get; set; }
-
-
         public string SelectedRoleID { get; set; }
         public string SelectedDeptID { get; set; }
 
@@ -95,7 +95,8 @@ namespace OnlineSinav.ViewModels
         [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "Parolalar Uyuşmuyor")]
         [DataType(DataType.Password)]
         public string password_confirm { get; set; }
-       
+     
+
     }
 
     

@@ -59,9 +59,9 @@ namespace OnlineSinav.Controllers
         public JsonResult CheckUsernameAvailability(string userdata)
         {   
             System.Threading.Thread.Sleep(200);
-            var SearchData = Database.Session.Query<Users>().FirstOrDefault(x => x.SchoolNumber == userdata);
+            var searchData = Database.Session.Query<Users>().Where(c => c.SchoolNumber == userdata).ToList().Count;
            
-            if (SearchData != null)
+            if (searchData != 0)
             {
                 return Json(1);
             }
@@ -69,11 +69,11 @@ namespace OnlineSinav.Controllers
             else { return Json(0); }
                     
         }
-        
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Logout", "Auth","Logout");
+            return RedirectToAction("Index", "HomePage");
         }
         }
 }

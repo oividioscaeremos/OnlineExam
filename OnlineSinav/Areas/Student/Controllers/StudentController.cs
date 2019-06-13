@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using OnlineSinav.Areas.Teacher.ViewModels;
 using OnlineSinav.Models;
 using Questions = OnlineSinav.Models.Questions;
@@ -47,6 +48,11 @@ namespace OnlineSinav.Areas.Student.Controllers
                 questions = result,
                 examduration = Int32.Parse(exam.ExamDuration)
             });
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToRoute("Home");
         }
 
     }
