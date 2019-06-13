@@ -507,6 +507,7 @@
     <Content Include="Areas\Teacher\Views\Exam\AssignExam.cshtml" />
     <Content Include="Areas\Teacher\Views\Shared\_AssignStudentsLayout.cshtml" />
     <Content Include="Areas\Student\Views\Student\ShowQuestions.cshtml" />
+    <Content Include="Areas\Teacher\Views\Exam\EditExam.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

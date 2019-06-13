@@ -50,7 +50,9 @@
 
             </div>
             <button type="button" class="btn btn-primary" id="submitForm"
-                    style="margin-top:10px; width:100%; height:50px;">SINAVI KAYDET</button>
+                    style="margin-top:10px; width:100%; height:50px;">
+                SINAVI KAYDET
+            </button>
         </form>
     </div>
 </div>
@@ -112,23 +114,17 @@
         forceParse: 0
     });
     $(document).ready(function () {
-
-
-
-        var max_fields = 25;
+         var max_fields = 25;
         var wrapper = $(".toAppend");
         var ThisExamID = @Model.selectedExam.id;
         var partialHTML = `@Html.Partial("_QuestionLayout", new OnlineSinav.Areas.Teacher.ViewModels.Questions {})`;
-
-        var x = 1;
-
-        $(wrapper).on("click", ".delete", function (e) {
+         var x = 1;
+         $(wrapper).on("click", ".delete", function (e) {
             e.preventDefault();
             $(this).parent('div').parent('div').parent('div').remove();
             x--;
         });
-
-        $(wrapper).on("click", ".newQuest", function (e) {
+         $(wrapper).on("click", ".newQuest", function (e) {
             e.preventDefault();
             if (x < max_fields) {
                 x++;
@@ -137,8 +133,7 @@
                 alert('You Reached the limits')
             }
         });
-
-        $("#submitForm").click(function () {
+         $("#submitForm").click(function () {
             let oneData = {};
             let allData = [];
             let stringifiedSTR = "[";
@@ -177,17 +172,14 @@
                     i = 0;
                 }
             });
-
-            stringifiedSTR += "]";
-
-            $.ajax({
+             stringifiedSTR += "]";
+             $.ajax({
                 type: "POST",
                 url: "/Teacher/Exam/EditExam",
                 traditional: true,
                 data: { formdata: stringifiedSTR, examDetails: JSON.stringify(examsDetails), examID: ThisExamID },
                 success: function (data) {
-
-                    window.location.assign("/Teacher/Exam");
+                     window.location.assign("/Teacher/Exam");
                 },
                 error: function (xhr) {
                     //debugger;
