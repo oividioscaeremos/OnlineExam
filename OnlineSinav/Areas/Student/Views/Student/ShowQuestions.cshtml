@@ -1,9 +1,11 @@
-﻿@using OnlineSinav.Models
+﻿@using System.Web.Razor
+@using OnlineSinav.Models
 @model OnlineSinav.Areas.Student.ViewModels.Exam
 @{
     var endTime = DateTime.UtcNow.AddSeconds(Model.examduration * 60);
     var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
     var counterIndex = 1;
+  
 }
 <div style="font-size:30px;" class="pull-right">
 <span  id="minRemaining"></span> DK <span id="secRemaining"></span> SANİYENİZ KALDI
@@ -42,6 +44,8 @@
         document.getElementById('secRemaining').innerText = secondsCounter;
         document.getElementById('minRemaining').innerText = parseInt(remSeconds / 60);
 
+        
+
         var _tick = setInterval(function() {
 
 
@@ -54,11 +58,34 @@
             remSeconds = remSeconds - 1;
             secondsCounter = secondsCounter - 1;
 
-
+            
+            if (parseInt(remSeconds / 60) == 0) {
+                if (secondsCounter == 0) {
+                    
+                    alert("Sinavin süren bitti sınavın kaydedildi, giriş sayfasina yönlendiriliyorsunuz");
+                    
+                    window.location.href = "Index"
+                    
+                }
+            }
 
         }, 1000);
+        
+        
 
-    }
+
+
+
+        }
+
+
+             
+
+        
+        
+        
+
+    
 
     startTick();
 
