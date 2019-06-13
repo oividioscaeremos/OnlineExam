@@ -314,10 +314,8 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             var exam = Database.Session.Load<Exam>(examId);
 
             exam.ExamStudents.Add(student);
-            student.exams.Add(exam);
 
             Database.Session.Update(exam);
-            Database.Session.Update(student);
             Database.Session.Flush();
         }
 
