@@ -38,7 +38,7 @@
                                 <button class="btn btn-success btn-xs" onclick="location.href='@Url.Action("EditExam","Exam", new { examID = exam.id })'"><i class="fa fa-check"></i> Düzenle</button>
                                 <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("AssignExam","Exam", new {teacherID = Model.teacher.id, examID = exam.id })'"><i class="fa fa-pencil"></i> Sınava Öğrenci Ata</button>
                                 <button class="btn btn-danger btn-xs deleteExam" data-id="@exam.id"><i class="fa fa-trash-o "></i> Sınavı Sil</button>
-                                <button class="btn btn-dark btn-xs"><i class="fa fa-trash-o "></i> Sonuçları Görüntüle</button>
+                                <button class="btn btn-dark btn-xs" onclick="location.href='@Url.Action("ShowResult","Exam", new { examID = exam.id })'"><i class="fa fa-trash-o "></i> Sonuçları Görüntüle</button>
                             </td>
                         </tr>
                     }

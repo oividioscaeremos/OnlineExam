@@ -1,0 +1,28 @@
+﻿@model OnlineSinav.Areas.Teacher.ViewModels.ShowResult
+@{
+    ViewBag.Title = "ShowResults";
+    Layout = "~/Areas/Teacher/Views/Shared/_Layout.cshtml";
+}
+<div class="content-panel">
+    <h4><i class="fa fa-angle-right"></i> Listelenen öğrenciler</h4>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Sınav Adı</th>
+            <th>Öğrenci Adı</th>
+            <th>Sonuç</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var item in Model.Results) { 
+            <tr>
+                <td>@item.exam.ExamName</td>
+                <td>@item.student.Name</td>
+                <td>@item.result</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

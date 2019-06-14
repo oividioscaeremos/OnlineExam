@@ -56,19 +56,7 @@ namespace OnlineSinav.Controllers
             
         }
         
-        public JsonResult CheckUsernameAvailability(string userdata)
-        {   
-            System.Threading.Thread.Sleep(200);
-            var searchData = Database.Session.Query<Users>().Where(c => c.SchoolNumber == userdata).ToList().Count;
-           
-            if (searchData != 0)
-            {
-                return Json(1);
-            }
-
-            else { return Json(0); }
-                    
-        }
+        
 
         public ActionResult Logout()
         {

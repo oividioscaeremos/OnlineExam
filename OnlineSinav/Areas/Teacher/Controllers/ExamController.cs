@@ -251,7 +251,7 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             var abcde = newExam;
 
             Database.Session.Save(newExam);
-            Database.Session.Flush();
+            Database.Session.Flush();   
 
 
         }
@@ -337,6 +337,17 @@ namespace OnlineSinav.Areas.Teacher.Controllers
             FormsAuthentication.SignOut();
             return RedirectToRoute("Home");
 
+        }
+
+        public ActionResult ShowResult(int examid)
+        {
+            var teacher = Database.Session.Query<Users>().Where(c=>c.SchoolNumber == User.Identity.Name).FirstOrDefault();
+            var results = Database.Session.Query<ExamResult>().Where(x => x.teacher.id == teacher.id && x.exam.id == examid).ToList();
+            return View(new ShowResult
+            {
+                Results = results
+
+            });
         }
     }
 }

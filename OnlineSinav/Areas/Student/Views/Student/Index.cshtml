@@ -120,9 +120,11 @@
                                                     counter++;
                                                     break;
                                                 }
+
                                             }
                                             if (counter == 0)
                                             {
+
                                                 <tr>
                                                     <td>@item.ExamName</td>
                                                     <td>@item.examDate.ToShortDateString()</td>
@@ -142,47 +144,66 @@
                                             {
                                                 counter = 0;
                                             }
+
                                         }
                                     }
 
-
-                                    @foreach (var resultedExam in Model.examResult)
-                                    {
-                                        if (resultedExam.id == -1)
-                                        {
-                                            <tr>
-                                                <td style="text-align:center;">-</td>
-                                                <td style="text-align:center;">-</td>
-                                                <td style="text-align:center;">-</td>
-                                                <td style="text-align:center;">-</td>
-                                                <td style="text-align:center;">-</td>
-                                                <td style="text-align:center;">-</td>
-                                            </tr>
-                                        }
-                                        else
-                                        {
-                                            <tr>
-                                                <td>@resultedExam.exam.id</td>
-                                                <td>@resultedExam.exam.examDate.ToShortDateString()</td>
-                                                <td>@resultedExam.exam.examStart.ToShortTimeString()</td>
-                                                <td>@resultedExam.exam.ExamDuration dk</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-round btn-theme02"
-                                                            name="redirect"
-                                                            disabled="disabled"
-                                                            onclick="location.href = '#'">
-                                                        Sınava gir
-                                                    </button>
-                                                </td>
-                                                <td>@resultedExam.result</td>
-                                            </tr>
-                                        }
-                                    }
 
                                 </tbody>
-
                             </table>
+                            <h4><i class="fa fa-angle-right"></i> Sonuçlar Tablosu</h4>
+                            <hr>
+                            <table class="table" >
+                            <thead>
+                            <tr>
+                                <td>Ders Adı</td>
+                                <td>Sınav Tarihi</td>
+                                <td>Sınav Başlama Saati</td>
+                                <td>Sınav Süresi</td>
+                                <td>Sınav Gir</td>
+                                <td>Sınav Notu</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var resultedExam in Model.examResult)
+                            {
+                                if (resultedExam.id == -1)
+                                {
+                                    <tr>
+                                        <td style="text-align:center;">-</td>
+                                        <td style="text-align:center;">-</td>
+                                        <td style="text-align:center;">-</td>
+                                        <td style="text-align:center;">-</td>
+                                        <td style="text-align:center;">-</td>
+                                        <td style="text-align:center;">-</td>
+                                    </tr>
+                                }
+                                else
+                                {
 
+
+                                    <tr>
+
+                                        <td>@resultedExam.exam.ExamName</td>
+
+                                        <td>@resultedExam.exam.examDate.ToShortDateString()</td>
+                                        <td>@resultedExam.exam.examStart.ToShortTimeString()</td>
+                                        <td>@resultedExam.exam.ExamDuration dk</td>
+                                        <td>
+                                            <button type="button" class="btn btn-round btn-theme02"
+                                                    name="redirect"
+                                                    disabled="disabled"
+                                                    onclick="location.href = '#'">
+                                                Sınava gir
+                                            </button>
+                                        </td>
+                                        <td>@resultedExam.result</td>
+                                    </tr>
+
+                                }
+                            }
+                            </tbody>
+                            </table>
                         </div>
                     </div>
                     <!-- /col-md-12 -->

@@ -30,6 +30,8 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
         }
     }
 
+   
+
     public class GetFormData
     {
         public string Name { get; set; }
@@ -110,5 +112,10 @@ namespace OnlineSinav.Areas.Teacher.ViewModels
         public string E { get; set; }
         [Display(Name = "DOĞRU CEVAP")]
         public string correct_answer { get; set; }
+    }
+    public class ShowResult
+    {
+
+        public IEnumerable<ExamResult> Results { get; set; }
     }
 }

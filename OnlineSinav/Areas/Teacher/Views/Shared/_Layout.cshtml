@@ -43,15 +43,13 @@
             *********************************************************************************************************************************************************** -->
         <!--header start-->
         <header class="header black-bg">
-            <div class="sidebar-toggle-box">
-                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-            </div>
+            
             <!--logo start-->
             <!--logo end-->
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
 
-                    <li><a class="logout" href="@Url.Action("Logout","Exam")">Logout</a></li>
+                    <li><a class="logout" href="@Url.Action("Logout","Exam")">Çıkış</a></li>
                 </ul>
             </div>
         </header>
@@ -60,18 +58,7 @@
             MAIN SIDEBAR MENU
             *********************************************************************************************************************************************************** -->
         <!--sidebar start-->
-        <aside>
-            <div id="sidebar" class="nav-collapse ">
-                <!-- sidebar menu start-->
-                <ul class="sidebar-menu" id="nav-accordion">
-                    
-                            <li><a href="@Url.Action("Index","Exam",new { area = "Teacher", @id = (Database.Session.Query<OnlineSinav.Models.Users>()
-                                        .FirstOrDefault(u=>u.SchoolNumber == HttpContext.Current.User.Identity.Name).id) })">Ana Sayfa</a></li>
-
-                        
-                    <!-- sidebar menu end-->
-            </div>
-        </aside>
+        
         <!--sidebar end-->
         <!-- **********************************************************************************************************************************************************
             MAIN CONTENT

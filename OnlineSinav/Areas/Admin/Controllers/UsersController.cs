@@ -75,13 +75,30 @@ namespace OnlineSinav.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult CreateUser(CreateUser form)
         {
-            if (Database.Session.Query<Users>().Any(u => u.SchoolNumber == form.school_number))
+
+            IEnumerable<Department> AllDepartment = Database.Session.Query<Department>();
+            IEnumerable<Roles> AllRoles = Database.Session.Query<Roles>().ToList();
+            if (Database.Session.Query<Users>().Any(u => u.SchoolNumber == form.school_number || u.Password == ""))
             {
                 ModelState.AddModelError("school_number", "Belirtilen numaraya ait bir kullanıcı zaten var.");
             }
 
             if (!ModelState.IsValid)
-                return View(form);
+
+                return View(new CreateUser
+                {
+                    firstname_lastname = form.firstname_lastname,
+                    allRoles = new SelectList(AllRoles),
+                    allDepts = new SelectList(AllDepartment)
+                });
+
+            //if (Database.Session.Query<Users>().Any(u => u.SchoolNumber == form.school_number))
+            //{
+            //    ModelState.AddModelError("school_number", "Belirtilen numaraya ait bir kullanıcı zaten var.");
+            //}
+
+            //if (!ModelState.IsValid)
+            //    return View(form);
 
             Users newUser = new Users {
                 SchoolNumber = form.school_number,

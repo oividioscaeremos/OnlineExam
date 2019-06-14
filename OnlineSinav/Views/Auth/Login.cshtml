@@ -77,26 +77,7 @@
         speed: 500
     });
 </script>
-<script>
-    function UserCheck() {
-        $("#Status").html("Bekleyiniz...");
-        $.post("@Url.Action("CheckUsernameAvailability", "Auth")",
-            {
-                userdata: $("#school_number").val
-            },
-            function (data) {
-                if (data == 0) {
-                    $("#Status").html('<font color="Red">Kayıtlı olmayan numara!</font>');
-                    $("#school_number").css("border-color", "Red");
 
-                }
-                else {
-                    $("#Status").html('<font color="Green">Kayıtlı numara!</font>');
-                    $("#school_number").css("border-color", "Green");
-                }
-            });
-    }
-</script>
 </body>
 
 </html>
