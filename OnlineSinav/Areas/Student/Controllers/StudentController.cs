@@ -45,9 +45,9 @@ namespace OnlineSinav.Areas.Student.Controllers
                     },
                 });
             }
-            List<Exam> examAvailableNow = new List<Exam>();
+            List<Exam> examAvailableNow = new List<Exam>(); // Süresi başlamış olan sınavlar, bu listeye çekilecek
 
-            if (result[0].id != -1)
+            if (result[0].id != -1) // Sonuçlar listesinin boş olup olmadığına bakılmakta.
             {
                 foreach (var exam in result)
                 {
@@ -60,8 +60,8 @@ namespace OnlineSinav.Areas.Student.Controllers
                     var nowTimeOfDay = DateTime.Now.TimeOfDay;
                     if (_exam.examStart.Date == DateTime.Now.Date && (_exam.examStart.AddMinutes(15) >= DateTime.Now) && (_exam.examStart <= DateTime.Now))
                     {
-                        examAvailableNow.Add(exam);
-                    }
+                        examAvailableNow.Add(exam); // Sınav başlamışsa ve öğrenci sınav başladıktan 15 dakika 
+                    }                               // sonraya kadar sınav ekranına geldiyse bu arkadaşa sınav bilgilerini atacağız.
                 }
             }
 
@@ -69,7 +69,7 @@ namespace OnlineSinav.Areas.Student.Controllers
             {
                 examAvailableNow.Add(new Exam {
                     id = -1,
-                });
+                }); // Maksat liste boş dönmesin, view'da sıkıntı çıkıyor sonra.
             }
 
             return View(new OnlineSinav.Areas.Student.ViewModels.StudentIndexShow
@@ -78,7 +78,6 @@ namespace OnlineSinav.Areas.Student.Controllers
                 examResult = examResults
             });
         }
-
 
         public ActionResult ShowQuestions(int exam_id)
         {
@@ -90,8 +89,6 @@ namespace OnlineSinav.Areas.Student.Controllers
 
             Exam exam = new Exam();
             exam = Database.Session.Load<Exam>(exam_id);
-
-
 
             return View(new ViewModels.Exam
             {
@@ -141,6 +138,9 @@ namespace OnlineSinav.Areas.Student.Controllers
                 }
             }
 
+            if (totalResult / point_per_question == thisExam.ExamQuestions.Count)
+                totalResult = 100;
+
             ExamResult exam_result = new ExamResult {
                 exam = thisExam,
                 student = thisStudent,
@@ -159,6 +159,5 @@ namespace OnlineSinav.Areas.Student.Controllers
             FormsAuthentication.SignOut();
             return RedirectToRoute("Home");
         }
-
     }
 }

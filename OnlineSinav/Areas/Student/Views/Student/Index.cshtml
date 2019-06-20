@@ -82,7 +82,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach (var item in Model.studentExams)
                                     {
                                         if (item.id == -1)
@@ -107,24 +106,22 @@
                                                         <td>@item.examDate.ToShortDateString()</td>
                                                         <td>@item.examStart.ToShortTimeString()</td>
                                                         <td>@item.ExamDuration dk</td>
-                                                        <td>
+                                                        <td style="text-align:center;">
                                                             <button type="button" class="btn btn-round btn-theme02"
                                                                     name="redirect"
                                                                     disabled="disabled"
                                                                     onclick="location.href = '#'">
-                                                                Sınava gir
+                                                                SINAV SONUÇLANDIRILMIŞTIR.
                                                             </button>
                                                         </td>
                                                         <td>@examresult.result</td>
                                                     </tr>
-                                                    counter++;
-                                                    break;
+                                                    counter++; // SONUÇLANMIŞ SINAV OLDUĞUNU BELİRTMEK İÇİN GEREKLİ.
+                                                    break; // sınav için bir sonuç varsa diğer sonuçlara bakılması gereksiz olduğundan break ediyoruz.
                                                 }
-
                                             }
                                             if (counter == 0)
                                             {
-
                                                 <tr>
                                                     <td>@item.ExamName</td>
                                                     <td>@item.examDate.ToShortDateString()</td>
@@ -144,84 +141,72 @@
                                             {
                                                 counter = 0;
                                             }
-
                                         }
                                     }
-
-
                                 </tbody>
                             </table>
                             <h4><i class="fa fa-angle-right"></i> Sonuçlar Tablosu</h4>
                             <hr>
-                            <table class="table" >
-                            <thead>
-                            <tr>
-                                <td>Ders Adı</td>
-                                <td>Sınav Tarihi</td>
-                                <td>Sınav Başlama Saati</td>
-                                <td>Sınav Süresi</td>
-                                <td>Sınav Gir</td>
-                                <td>Sınav Notu</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var resultedExam in Model.examResult)
-                            {
-                                if (resultedExam.id == -1)
-                                {
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td style="text-align:center;">-</td>
-                                        <td style="text-align:center;">-</td>
-                                        <td style="text-align:center;">-</td>
-                                        <td style="text-align:center;">-</td>
-                                        <td style="text-align:center;">-</td>
-                                        <td style="text-align:center;">-</td>
+                                        <td>Ders Adı</td>
+                                        <td>Sınav Tarihi</td>
+                                        <td>Sınav Başlama Saati</td>
+                                        <td>Sınav Süresi</td>
+                                        <td>Sınav Gir</td>
+                                        <td>Sınav Notu</td>
                                     </tr>
-                                }
-                                else
-                                {
+                                </thead>
+                                <tbody>
+                                    @foreach (var resultedExam in Model.examResult)
+                                    {
+                                        if (resultedExam.id == -1)
+                                        {
+                                            <tr>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                                <td style="text-align:center;">-</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@resultedExam.exam.ExamName</td>
+                                                <td>@resultedExam.exam.examDate.ToShortDateString()</td>
+                                                <td>@resultedExam.exam.examStart.ToShortTimeString()</td>
+                                                <td>@resultedExam.exam.ExamDuration dk</td>
+                                                <td  style="text-align:center;">
+                                                    <button type="button" class="btn btn-round btn-theme02"
+                                                            name="redirect"
+                                                            disabled="disabled"
+                                                            onclick="location.href = '#'">
+                                                        SINAV SONUÇLANDIRILMIŞTIR.
+                                                    </button>
+                                                </td>
+                                                <td>@resultedExam.result</td>
+                                            </tr>
 
-
-                                    <tr>
-
-                                        <td>@resultedExam.exam.ExamName</td>
-
-                                        <td>@resultedExam.exam.examDate.ToShortDateString()</td>
-                                        <td>@resultedExam.exam.examStart.ToShortTimeString()</td>
-                                        <td>@resultedExam.exam.ExamDuration dk</td>
-                                        <td>
-                                            <button type="button" class="btn btn-round btn-theme02"
-                                                    name="redirect"
-                                                    disabled="disabled"
-                                                    onclick="location.href = '#'">
-                                                Sınava gir
-                                            </button>
-                                        </td>
-                                        <td>@resultedExam.result</td>
-                                    </tr>
-
-                                }
-                            }
-                            </tbody>
+                                        }
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
                     <!-- /col-md-12 -->
-
                 </div>
                 <!-- row -->
                 <!-- /row -->
             </section>
         </section>
-
-
-
         <!-- /MAIN CONTENT -->
         <!--main content end-->
         <!--footer start-->
         <!--footer end-->
     </section>
-
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="~/Content/lib/jquery/jquery.min.js"></script>
     <script src="~/Content/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -231,7 +216,5 @@
     <!--common script for all pages-->
     <script src="~/Content/lib/common-scripts.js"></script>
     <!--script for this page-->
-
 </body>
-
 </html>

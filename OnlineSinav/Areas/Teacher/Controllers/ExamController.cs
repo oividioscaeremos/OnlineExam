@@ -48,7 +48,6 @@ namespace OnlineSinav.Areas.Teacher.Controllers
 
             exam = Database.Session.Load<Exam>(examID);
 
-
             var dateSplitted = exam.examStart.ToString("dd/MM/yyyy HH:mm:ss");
             //var hour = Convert.ToInt32(dateSplitted[1][0] + dateSplitted[1][1]);
             string day,month,hour,minute;
@@ -114,16 +113,12 @@ namespace OnlineSinav.Areas.Teacher.Controllers
                 examFullDate = Convert.ToDateTime(examDateStr[0]);
                 dateString = examFullDate.ToString("dd/MM/yyyy HH:mm");
                 examFullDate = DateTime.ParseExact(dateString,"dd/MM/yyyy HH:mm", null);
-
             }
-            else
-            {
+            else{
                 var degisken = examDateStr[0].TrimEnd(' ') + " " + examDateStr[1].TrimStart(' ');
 
                 examFullDate = DateTime.ParseExact(degisken,"dd/MM/yyyy HH:mm",null);
                 dateString = examFullDate.ToString("dd/MM/yyyy HH:mm");
-
-
             }
 
             currentExamsQuestions = examToEdit.ExamQuestions; // 
@@ -196,22 +191,22 @@ namespace OnlineSinav.Areas.Teacher.Controllers
         [HttpPost]
         public void CreateExam(string formdata, string examDetails)
         {
+            Users currentTeacher = new Users();
+
             var questionsArray = JsonConvert.DeserializeObject<List<FormData>>(formdata);
             var examDetailsArray = JsonConvert.DeserializeObject<List<GetFormData>>(examDetails);
 
-            Users currentTeacher = new Users();
+            string[] dateTime = examDetailsArray[2].Value.ToString().Split('-'); 
+            string[] examStart = dateTime[1].TrimStart(' ').Split(':');
 
             currentTeacher = Database.Session.Query<Users>().FirstOrDefault(u => u.SchoolNumber == HttpContext.User.Identity.Name);
 
-            string[] dateTime;
-            dateTime = examDetailsArray[2].Value.ToString().Split('-');
 
             var examDuration = examDetailsArray[1].Value;
 
             var hour = Convert.ToInt32(examDuration) / 60;
             var minutes = Convert.ToInt32(examDuration) % 60;
 
-            string[] examStart = dateTime[1].TrimStart(' ').Split(':');
 
             var examDate = DateTime.ParseExact(dateTime[0].TrimEnd(' '), "dd/MM/yyyy", null);
             var examStartt = DateTime.ParseExact((dateTime[0].TrimEnd(' ') + " " + dateTime[1].TrimEnd(' ').TrimStart(' ')), "dd/MM/yyyy HH:mm", null);
@@ -247,13 +242,8 @@ namespace OnlineSinav.Areas.Teacher.Controllers
                 Database.Session.Save(toAdd);
             };
 
-
-            var abcde = newExam;
-
             Database.Session.Save(newExam);
             Database.Session.Flush();   
-
-
         }
 
         public ActionResult AssignExam(int teacherID, int examID) // burası tüm sınavları çektiğim ekran
